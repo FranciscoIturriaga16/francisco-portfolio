@@ -2,140 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* Design tokens. Values are RGB channels; the hex equivalent is in each comment. The site is dark only. */
 @layer base {
   :root {
-    --background: 220 20% 8%;
-    --foreground: 210 40% 98%;
+    --background: 11 13 20; /* #0B0D14 */
+    --surface: 18 21 31; /* #12151F */
+    --raised: 22 26 39; /* #161A27 */
+    --panel: 15 18 27; /* #0F121B */
+    --border: 28 33 48; /* #1C2130 */
+    --border-strong: 42 49 69; /* #2A3145 */
+    --foreground: 232 234 240; /* #E8EAF0 */
+    --secondary: 201 206 218; /* #C9CEDA */
+    --muted: 174 180 195; /* #AEB4C3 */
+    --label: 138 146 166; /* #8A92A6 */
+    --nav: 154 161 178; /* #9AA1B2 */
+    --accent: 124 149 255; /* #7C95FF */
+    --accent-soft: 30 38 64; /* #1E2640 */
+    --accent-soft-foreground: 183 198 255; /* #B7C6FF */
+    --highlight: 20 26 46; /* #141A2E */
+    --frame: 35 40 56; /* #232838 */
+    --amber: 245 181 68; /* #F5B544 */
+    --green: 74 222 128; /* #4ADE80 */
 
-    --card: 220 20% 12%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 220 20% 10%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 220 80% 60%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 220 20% 15%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 220 20% 20%;
-    --muted-foreground: 215 20% 65%;
-
-    --accent: 240 70% 65%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 220 20% 20%;
-    --input: 220 20% 15%;
-    --ring: 220 80% 60%;
-
-    --radius: 1rem;
-
-    /* Glass effect colors */
-    --glass-bg: 220 90% 65%;
-    --glass-bg-end: 240 85% 70%;
-    --glass-overlay: 0 0% 100%;
-    --glass-shadow: 220 80% 50%;
-
-    /* Sidebar tokens */
-    --sidebar-background: 220 20% 10%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 270 70% 65%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 220 20% 15%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 220 20% 20%;
-    --sidebar-ring: 270 70% 65%;
-  }
-}
-
-@layer utilities {
-  .glass-card {
-    @apply relative overflow-hidden rounded-2xl transition-all duration-500;
-    background: linear-gradient(135deg, 
-      hsl(var(--glass-bg) / 0.22), 
-      hsl(var(--glass-bg-end) / 0.30),
-      hsl(var(--primary) / 0.18),
-      hsl(var(--glass-bg) / 0.16));
-    backdrop-filter: blur(40px) saturate(200%);
-    border: 1.5px solid transparent;
-    background-clip: padding-box;
-    box-shadow: 
-      0 0 8px -4px hsl(var(--primary) / 0.08),
-      0 25px 70px -15px hsl(var(--glass-shadow) / 0.35),
-      inset 0 1px 0 0 hsl(var(--glass-overlay) / 0.2),
-      inset 0 -1px 0 0 hsl(var(--primary) / 0.15);
-    transform: translateY(-4px);
+    color-scheme: dark;
   }
 
-  .glass-card::before {
-    content: '';
-    @apply absolute inset-0 rounded-2xl opacity-70 transition-opacity duration-500;
-    background: linear-gradient(135deg, 
-      hsl(var(--glass-bg) / 0.75), 
-      hsl(var(--glass-bg-end) / 0.55),
-      hsl(var(--primary) / 0.45));
-    z-index: -1;
-    border: 1.5px solid hsl(var(--primary) / 0.3);
-    border-radius: inherit;
-  }
-
-  .glass-card::after {
-    content: '';
-    @apply absolute inset-0 rounded-2xl opacity-100 transition-opacity duration-500;
-    background: linear-gradient(135deg, 
-      hsl(var(--primary) / 0.15), 
-      hsl(var(--accent) / 0.15));
-    z-index: -1;
-    filter: blur(20px);
-  }
-
-  .glass-card:hover {
-    box-shadow: 
-      0 0 12px -4px hsl(var(--primary) / 0.12),
-      0 28px 75px -15px hsl(var(--glass-shadow) / 0.4),
-      inset 0 1px 0 0 hsl(var(--glass-overlay) / 0.25),
-      inset 0 -1px 0 0 hsl(var(--primary) / 0.2);
-    transform: translateY(-6px);
-  }
-
-  .glass-card:hover::before {
-    opacity: 0.7;
-    border-color: hsl(var(--primary) / 0.4);
-  }
-
-  .nav-link {
-    @apply relative text-foreground transition-colors duration-300 hover:text-primary;
-  }
-
-  .nav-link::after {
-    content: '';
-    @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
-  }
-
-  .nav-link:hover::after,
-  .nav-link.active::after {
-    @apply w-full;
-  }
-
-  .text-br1 {
-    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-sans text-[17px] leading-[1.65] text-foreground antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* Keep anchored sections clear of the sticky header (it wraps to two rows on small screens). */
+  [id] {
+    scroll-margin-top: 128px;
+  }
+
+  @media (min-width: 640px) {
+    [id] {
+      scroll-margin-top: 88px;
+    }
   }
 }
