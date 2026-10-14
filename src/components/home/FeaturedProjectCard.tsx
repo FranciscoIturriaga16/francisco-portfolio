@@ -16,14 +16,14 @@ const FeaturedProjectCard = ({ project }: { project: Project }) => {
         "group mt-10 flex flex-wrap overflow-hidden rounded-3xl text-foreground transition-colors hover:border-border-strong",
       )}
     >
-      <div className="flex min-h-[400px] min-w-0 shrink grow-[999] basis-[520px] items-end justify-center gap-5 bg-raised px-6 pt-12">
+      <div className="flex min-h-[280px] min-w-0 sm:min-h-[400px] shrink grow-[999] basis-[520px] items-end justify-center gap-5 bg-raised px-6 pt-12">
         {phones.length > 0 ? (
           phones.map((image, index) => (
             <div
               key={image.src}
               className={cn(
                 "min-w-0 max-w-[180px] flex-1 overflow-hidden rounded-t-[26px] border-[6px] border-b-0 border-frame bg-[#0E0F12]",
-                index === 0 ? "h-[340px]" : "h-[300px]",
+                index === 0 ? "aspect-[180/340]" : "aspect-[180/300]",
               )}
             >
               <img src={image.src} alt={image.alt} className="block h-full w-full object-cover object-top" />

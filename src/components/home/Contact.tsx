@@ -4,6 +4,8 @@ import { cardSurface, pillButton } from "@/components/common/styles";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
+const [emailUser, emailDomain] = site.email.split("@");
+
 const Contact = () => (
   <section
     id="contact"
@@ -19,9 +21,13 @@ const Contact = () => (
     </h2>
     <p className="mt-5 max-w-[560px] text-muted">{site.contact.text}</p>
     <div className="mt-9 flex flex-wrap gap-3">
-      <a href={`mailto:${site.email}`} className={pillButton("primary", "min-w-0 break-all")}>
+      <a href={`mailto:${site.email}`} className={pillButton("primary", "min-w-0 py-2")}>
         <Mail aria-hidden="true" className="size-[18px] shrink-0" strokeWidth={2} />
-        {site.email}
+        {/* Lets the address wrap after the @ on narrow screens instead of mid word. */}
+        <span>
+          {emailUser}@<wbr />
+          {emailDomain}
+        </span>
       </a>
       <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer" className={pillButton("outline")}>
         LinkedIn

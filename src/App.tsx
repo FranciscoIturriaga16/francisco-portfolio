@@ -5,7 +5,7 @@ import CaseStudy from "./pages/CaseStudy";
 import NotFound from "./pages/NotFound";
 
 const App = () => (
-  <BrowserRouter>
+  <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
     <ScrollManager />
     <Routes>
       <Route path="/" element={<Index />} />
