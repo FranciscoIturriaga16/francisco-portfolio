@@ -1,24 +1,27 @@
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
+import SiteHeader from "@/components/layout/SiteHeader";
+import SiteFooter from "@/components/layout/SiteFooter";
+import Eyebrow from "@/components/common/Eyebrow";
+import { container, pillButton } from "@/components/common/styles";
+import { cn } from "@/lib/utils";
 
-const NotFound = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-  }, [location.pathname]);
-
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-gray-600">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 underline hover:text-blue-700">
-          Return to Home
-        </a>
-      </div>
-    </div>
-  );
-};
+const NotFound = () => (
+  <>
+    <SiteHeader />
+    <main id="main" className={cn(container, "pb-12 pt-[120px]")}>
+      <Eyebrow>Error 404</Eyebrow>
+      <h1 className="mt-4 text-[clamp(44px,7vw,84px)] font-bold leading-[1.02] tracking-[-0.04em]">Page not found</h1>
+      <p className="mt-6 max-w-[560px] text-[clamp(18px,2vw,21px)] text-muted">
+        The page you're looking for doesn't exist or has moved.
+      </p>
+      <Link to="/" className={pillButton("primary", "mt-10")}>
+        <ArrowLeft aria-hidden="true" className="size-[18px]" strokeWidth={2.2} />
+        Back to home
+      </Link>
+    </main>
+    <SiteFooter />
+  </>
+);
 
 export default NotFound;

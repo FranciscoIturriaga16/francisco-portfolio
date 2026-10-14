@@ -6,10 +6,12 @@ interface TagProps {
   variant?: "outline" | "featured";
   /** Adds a colored status dot before the text. */
   dot?: "amber" | "green";
+  /** The case study hero uses a slightly larger dot. */
+  dotSize?: "sm" | "md";
   className?: string;
 }
 
-const Tag = ({ children, variant = "outline", dot, className }: TagProps) => (
+const Tag = ({ children, variant = "outline", dot, dotSize = "sm", className }: TagProps) => (
   <span
     className={cn(
       "inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] leading-snug",
@@ -18,7 +20,7 @@ const Tag = ({ children, variant = "outline", dot, className }: TagProps) => (
     )}
   >
     {dot && (
-      <span aria-hidden="true" className={cn("size-1.5 rounded-full", dot === "amber" ? "bg-amber" : "bg-green")} />
+      <span aria-hidden="true" className={cn("rounded-full", dotSize === "md" ? "size-2" : "size-1.5", dot === "amber" ? "bg-amber" : "bg-green")} />
     )}
     {children}
   </span>
