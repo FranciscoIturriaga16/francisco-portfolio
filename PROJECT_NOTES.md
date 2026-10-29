@@ -9,9 +9,10 @@ Stack: Vite 5, React 18, TypeScript (non-strict), Tailwind CSS 3, React Router 6
 - The redesign is done and committed: the homepage matches `design/home-design.html` and every `/case-study/:id` page matches `design/case-study-haven-design.html`.
 - `npm run build` and `npm run lint` both pass cleanly.
 - Tested in headless Chrome at 375, 768 and 1440 px: no horizontal scroll, no broken images, no console errors. Hash links (for example `/#work`) work when arriving from a case study.
+- Uncommitted: `public/resume.pdf` was replaced again after the last push (120.8 KB). Confirm it is the right version, then commit and push it.
 
 ## Recent changes
-- 2026-10-29: Replaced `public/resume.pdf` with the new resume. Pushed to GitHub; added `vercel.json` and `.env` ignores.
+- 2026-10-29: Created the public GitHub repo and pushed `main`; added `vercel.json` (SPA rewrite) and `.env` ignores; replaced `public/resume.pdf` with the new resume. Secret scan of full history was clean.
 - 2026-10-13: Fixed mobile layout of the featured card phones and the contact email button; opted in to React Router v7 future flags to silence console warnings.
 - 2026-10-13: Removed old components, 48 unused shadcn/ui files, hooks, `App.css`, `placeholder.svg`, Lovable config and 134 unused npm packages. Rewrote README.
 - 2026-10-13: Rebuilt the case study page as one reusable template driven by content; restyled the 404 page.
@@ -32,6 +33,7 @@ Stack: Vite 5, React 18, TypeScript (non-strict), Tailwind CSS 3, React Router 6
 - The same nav is used on every page. The footer note "Thanks for stopping by" appears only on the homepage.
 - On mobile, the case study hero hides the third phone, so phones never stack into a long column.
 - Do not upgrade major versions of React, React Router, Tailwind or Vite.
+- The resume is served from `public/resume.pdf` (`resumePath` in `site.ts`). To update it, overwrite that file; keep the name.
 - `components.json` is kept so shadcn components can be added later. `src/assets/haven-folio-2.png` is unused but kept.
 
 ## Next steps
@@ -43,6 +45,7 @@ Stack: Vite 5, React 18, TypeScript (non-strict), Tailwind CSS 3, React Router 6
 
 ## Gotchas
 - A Bash hook rewrites commands through `rtk`, which can mangle output and shell variable expansion (for example `npm uninstall $LIST` silently did nothing). Use `rtk proxy <cmd>` for raw output, and pass explicit arguments.
+- `gh` is signed into two GitHub accounts. The repo belongs to `FranciscoIturriaga16`; prefix gh and push commands with `GH_TOKEN=$(gh auth token --user FranciscoIturriaga16)` if one fails with "not found" or a permission error.
 - Dev server runs on port 8080 (`npm run dev`).
 - Typecheck with `npx tsc --noEmit -p tsconfig.app.json`.
 - Tailwind classes are built from strings in `src/components/common/styles.ts`; keep full class names there so Tailwind can detect them.
