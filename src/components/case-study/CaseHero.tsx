@@ -1,9 +1,10 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Eyebrow from "@/components/common/Eyebrow";
 import Tag from "@/components/common/Tag";
 import DeviceFrame from "@/components/common/DeviceFrame";
-import type { Project } from "@/content/projects";
+import { pillButton } from "@/components/common/styles";
+import { statusDots, type Project } from "@/content/projects";
 import type { CaseStudy } from "@/content/caseStudies";
 import { cn } from "@/lib/utils";
 
@@ -45,7 +46,7 @@ const HeroVisual = ({ project }: { project: Project }) => {
 const CaseHero = ({ project, caseStudy, number }: CaseHeroProps) => {
   const meta = [
     { label: "Role", value: project.role },
-    { label: "Stack", value: project.stack.join(" · ") },
+    { label: "Stack", value: caseStudy.stack ?? project.stack.join(", ") },
     { label: "Platform", value: caseStudy.platform },
   ];
 
@@ -62,7 +63,7 @@ const CaseHero = ({ project, caseStudy, number }: CaseHeroProps) => {
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <Eyebrow>Case study · {number}</Eyebrow>
           {project.status && (
-            <Tag dot="amber" dotSize="md" className="gap-2">
+            <Tag dot={statusDots[project.status]} dotSize="md" className="gap-2">
               {project.status}
             </Tag>
           )}
@@ -73,6 +74,13 @@ const CaseHero = ({ project, caseStudy, number }: CaseHeroProps) => {
         <p className="mt-6 max-w-[720px] text-[clamp(20px,2.4vw,26px)] leading-[1.4] tracking-[-0.01em] text-secondary">
           {caseStudy.tagline}
         </p>
+        {project.link && (
+          <a href={project.link.url} target="_blank" rel="noopener noreferrer" className={pillButton("outline", "mt-8")}>
+            Visit {project.link.label}
+            <ArrowUpRight aria-hidden="true" className="size-[18px]" strokeWidth={2.2} />
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+        )}
 
         <dl className="mt-12 grid grid-cols-[repeat(auto-fit,minmax(min(200px,100%),1fr))] gap-px overflow-hidden rounded-2xl border border-border bg-border">
           {meta.map(({ label, value }) => (

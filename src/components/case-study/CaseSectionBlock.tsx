@@ -1,21 +1,30 @@
-import { Check } from "lucide-react";
+import { Fragment } from "react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, Repeat } from "lucide-react";
 import Eyebrow from "@/components/common/Eyebrow";
 import type { CaseSection } from "@/content/caseStudies";
 import { cn } from "@/lib/utils";
 import FigureGrid from "./FigureGrid";
 
 interface CaseSectionBlockProps {
-  id: string;
   number: string;
-  title: string;
   section: CaseSection;
 }
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+/** Grid cells for a four step loop, clockwise from the top left, and the arrow that leaves each step. */
+const cycleLayout = [
+  { step: "col-start-1 row-start-1", arrow: "col-start-2 row-start-1", Icon: ArrowRight },
+  { step: "col-start-3 row-start-1", arrow: "col-start-3 row-start-2", Icon: ArrowDown },
+  { step: "col-start-3 row-start-3", arrow: "col-start-2 row-start-3", Icon: ArrowLeft },
+  { step: "col-start-1 row-start-3", arrow: "col-start-1 row-start-2", Icon: ArrowUp },
+];
+
+const pad = (value: number) => String(value).padStart(2, "0");
+
 /** One numbered case study section: label column on the left, content on the right (stacked on small screens). */
-const CaseSectionBlock = ({ id, number, title, section }: CaseSectionBlockProps) => {
-  const { comparison } = section;
+const CaseSectionBlock = ({ number, section }: CaseSectionBlockProps) => {
+  const { id, title, comparison } = section;
   const headingId = `${id}-title`;
 
   return (
@@ -38,14 +47,77 @@ const CaseSectionBlock = ({ id, number, title, section }: CaseSectionBlockProps)
           ))}
 
           {section.points && (
-            <dl className="mt-8 flex flex-col gap-5">
+            <dl className="mt-8 flex flex-col gap-px overflow-hidden rounded-2xl border border-border bg-border">
               {section.points.map((point) => (
-                <div key={point.term}>
-                  <dt className="font-semibold">{point.term}</dt>
-                  <dd className="mt-1 text-base text-muted">{point.text}</dd>
+                <div key={point.term} className="flex flex-wrap gap-x-8 gap-y-2 bg-panel px-7 py-6">
+                  <dt className="shrink-0 basis-[120px] pt-0.5 font-mono text-[13px] uppercase tracking-[0.08em] text-accent">
+                    {point.term}
+                  </dt>
+                  <dd className="min-w-0 flex-1 basis-[280px] text-base text-muted">{point.text}</dd>
                 </div>
               ))}
             </dl>
+          )}
+
+          {section.flows?.map((flow) => (
+            <div key={flow.label} className="mt-8 rounded-2xl border border-border bg-surface p-6 sm:p-7">
+              <Eyebrow as="h3" tone="label" size="sm">
+                {flow.label}
+              </Eyebrow>
+              <ol className="mt-4 grid gap-10 sm:grid-cols-2">
+                {flow.steps.map((step, index) => (
+                  <li key={step.title} className="relative rounded-xl border border-border bg-panel p-5">
+                    {index > 0 && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute -top-[30px] left-1/2 -translate-x-1/2 text-accent sm:-left-[30px] sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0"
+                      >
+                        <ArrowDown className="size-5 sm:hidden" strokeWidth={2.2} />
+                        <ArrowRight className="hidden size-5 sm:block" strokeWidth={2.2} />
+                      </span>
+                    )}
+                    <p className="font-mono text-[13px] text-accent">{pad(index + 1)}</p>
+                    <h4 className="mt-1 font-semibold">{step.title}</h4>
+                    <p className="mt-1.5 text-base text-muted">{step.text}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+
+          {section.cycle && (
+            <div
+              role="list"
+              aria-label="A loop: the last step leads back to the first"
+              className="mt-10 grid grid-cols-[1fr_auto_1fr] grid-rows-[1fr_auto_1fr] gap-3 rounded-2xl border border-border bg-surface p-4 sm:gap-4 sm:p-7"
+            >
+              {section.cycle.slice(0, cycleLayout.length).map((step, index) => {
+                const { step: stepCell, arrow: arrowCell, Icon } = cycleLayout[index];
+                return (
+                  <Fragment key={step}>
+                    <div role="listitem" className={cn(stepCell, "rounded-xl border border-border bg-panel p-4 sm:p-5")}>
+                      <p className="font-mono text-[13px] text-accent">{pad(index + 1)}</p>
+                      <p className="mt-1 text-[15px] font-medium leading-snug sm:text-base">{step}</p>
+                    </div>
+                    <Icon aria-hidden="true" className={cn(arrowCell, "size-5 place-self-center text-accent")} strokeWidth={2.2} />
+                  </Fragment>
+                );
+              })}
+              <Repeat aria-hidden="true" className="col-start-2 row-start-2 size-5 place-self-center text-label" />
+            </div>
+          )}
+
+          {section.stats && (
+            <ul className="mt-8 grid gap-4 sm:grid-cols-3">
+              {section.stats.map((stat) => (
+                <li
+                  key={stat}
+                  className="rounded-2xl border border-border bg-surface p-6 text-[clamp(22px,2.4vw,28px)] font-semibold leading-[1.2] tracking-[-0.02em]"
+                >
+                  {stat}
+                </li>
+              ))}
+            </ul>
           )}
 
           {section.quote && (
@@ -59,7 +131,7 @@ const CaseSectionBlock = ({ id, number, title, section }: CaseSectionBlockProps)
           )}
 
           {section.highlights && (
-            <ul className="mt-8 grid grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))] gap-4">
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2">
               {section.highlights.map((item) => (
                 <li key={item.title} className="rounded-2xl border border-border bg-panel p-6">
                   <h3 className="font-semibold">{item.title}</h3>
@@ -158,20 +230,6 @@ const CaseSectionBlock = ({ id, number, title, section }: CaseSectionBlockProps)
 
           {section.outro && <p className="mt-8 text-muted">{section.outro}</p>}
 
-          {section.nextSteps && (
-            <div className="mt-8 rounded-2xl border border-border bg-surface p-7">
-              <Eyebrow as="h3" tone="label" size="sm">
-                Up next
-              </Eyebrow>
-              <ul className="mt-4 flex flex-wrap gap-2.5">
-                {section.nextSteps.map((step) => (
-                  <li key={step} className="rounded-full border border-border-strong px-4 py-2 text-[15px] leading-snug">
-                    {step}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
       </section>
 

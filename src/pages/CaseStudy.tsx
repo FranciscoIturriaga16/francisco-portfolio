@@ -6,7 +6,7 @@ import { container } from "@/components/common/styles";
 import CaseHero from "@/components/case-study/CaseHero";
 import CaseSectionBlock from "@/components/case-study/CaseSectionBlock";
 import NextProject from "@/components/case-study/NextProject";
-import { getCaseStudy, sectionOrder } from "@/content/caseStudies";
+import { getCaseStudy } from "@/content/caseStudies";
 import { projects } from "@/content/projects";
 import { site } from "@/content/site";
 import NotFound from "./NotFound";
@@ -32,25 +32,15 @@ const CaseStudy = () => {
 
   // The last project wraps around to the first.
   const nextProject = projects[(index + 1) % projects.length];
-  const sections = sectionOrder.filter(({ key }) => caseStudy[key]);
 
   return (
     <>
       <SiteHeader />
       <main id="main" className={container}>
         <CaseHero project={project} caseStudy={caseStudy} number={pad(index + 1)} />
-        {sections.map(({ key, defaultTitle }, position) => {
-          const section = caseStudy[key]!;
-          return (
-            <CaseSectionBlock
-              key={key}
-              id={key}
-              number={pad(position + 1)}
-              title={section.title ?? defaultTitle}
-              section={section}
-            />
-          );
-        })}
+        {caseStudy.sections.map((section, position) => (
+          <CaseSectionBlock key={section.id} number={pad(position + 1)} section={section} />
+        ))}
         <NextProject project={nextProject} />
       </main>
       <SiteFooter />
