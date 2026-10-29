@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
 
-/** Page width container shared by the header, main content and footer. */
-export const container = "mx-auto w-full max-w-[1120px] px-6";
+/** Page width container shared by the header, main content and footer. The side padding clears notches in landscape. */
+export const container =
+  "mx-auto w-full max-w-[1120px] pl-[max(1.5rem,env(safe-area-inset-left))] pr-[max(1.5rem,env(safe-area-inset-right))]";
 
 const pillBase =
   "inline-flex min-h-12 items-center gap-2.5 rounded-full px-6 text-base transition-colors";

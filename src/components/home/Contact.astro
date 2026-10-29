@@ -1,0 +1,36 @@
+---
+import { Mail } from "@lucide/astro";
+import Eyebrow from "@/components/common/Eyebrow.astro";
+import { cardSurface, pillButton } from "@/components/common/styles";
+import { site } from "@/content/site";
+import { cn } from "@/lib/utils";
+
+const [emailUser, emailDomain] = site.email.split("@");
+---
+
+<section
+  id="contact"
+  aria-labelledby="contact-title"
+  class={cn(cardSurface, "mt-[140px] rounded-[28px] p-[clamp(32px,6vw,72px)]")}
+>
+  <Eyebrow>Contact</Eyebrow>
+  <h2 id="contact-title" class="mt-3 max-w-[760px] text-[clamp(36px,5.5vw,64px)] font-bold leading-[1.05] tracking-[-0.035em]">
+    {site.contact.title}
+  </h2>
+  <p class="mt-5 max-w-[560px] text-muted">{site.contact.text}</p>
+  <div class="mt-9 flex flex-wrap gap-3">
+    <a href={`mailto:${site.email}`} class={pillButton("primary", "min-w-0 max-w-full py-2")}>
+      <Mail aria-hidden="true" class="size-[18px] shrink-0" stroke-width={2} />
+      <!-- Lets the address wrap after the @ on narrow screens instead of mid word. -->
+      <span class="min-w-0">{emailUser}@<wbr />{emailDomain}</span>
+    </a>
+    <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer" class={pillButton("outline")}>LinkedIn</a>
+    {
+      site.githubUrl && (
+        <a href={site.githubUrl} target="_blank" rel="noopener noreferrer" class={pillButton("outline")}>
+          GitHub
+        </a>
+      )
+    }
+  </div>
+</section>

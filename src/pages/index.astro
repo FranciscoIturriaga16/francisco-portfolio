@@ -1,0 +1,26 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { container } from "@/components/common/styles";
+import Hero from "@/components/home/Hero.astro";
+import Projects from "@/components/home/Projects.astro";
+import About from "@/components/home/About.astro";
+import Experience from "@/components/home/Experience.astro";
+import Contact from "@/components/home/Contact.astro";
+import { site } from "@/content/site";
+---
+
+<BaseLayout
+  title={site.seo.title}
+  description={site.seo.description}
+  image={site.seo.image}
+  imageAlt={site.seo.imageAlt}
+  footerNote
+>
+  <main id="main" class={container}>
+    <Hero />
+    <Projects />
+    <About />
+    <Experience />
+    <Contact />
+  </main>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+  variant?: "outline" | "featured";
+  /** Adds a colored status dot before the text. */
+  dot?: "amber" | "green" | "muted";
+  /** The case study hero uses a slightly larger dot. */
+  dotSize?: "sm" | "md";
+  class?: string;
+}
+
+const dotColors = { amber: "bg-amber", green: "bg-green", muted: "bg-label" };
+
+const { variant = "outline", dot, dotSize = "sm", class: className } = Astro.props;
+---
+
+<span
+  class={cn(
+    "inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] leading-snug",
+    variant === "featured" ? "bg-accent-soft text-accent-soft-foreground" : "border border-border-strong text-secondary",
+    className,
+  )}
+>
+  {dot && <span aria-hidden="true" class={cn("rounded-full", dotSize === "md" ? "size-2" : "size-1.5", dotColors[dot])} />}
+  <slot />
+</span>

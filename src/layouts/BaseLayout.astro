@@ -1,0 +1,80 @@
+---
+import "@fontsource/geist/400.css";
+import "@fontsource/geist/500.css";
+import "@fontsource/geist/600.css";
+import "@fontsource/geist/700.css";
+import "@fontsource/geist-mono/400.css";
+import "@fontsource/geist-mono/500.css";
+import "@/index.css";
+import geistRegular from "@fontsource/geist/files/geist-latin-400-normal.woff2?url";
+import geistBold from "@fontsource/geist/files/geist-latin-700-normal.woff2?url";
+import geistMonoRegular from "@fontsource/geist-mono/files/geist-mono-latin-400-normal.woff2?url";
+import SiteHeader from "@/components/layout/SiteHeader.astro";
+import SiteFooter from "@/components/layout/SiteFooter.astro";
+import { site } from "@/content/site";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Link preview image: a path under public/ or a generated route. */
+  image: string;
+  imageAlt: string;
+  ogType?: "website" | "article";
+  /** Pages that should not be indexed (404) get no canonical URL. */
+  noindex?: boolean;
+  /** Homepage only: the footer sign off. */
+  footerNote?: boolean;
+}
+
+const { title, description, image, imageAlt, ogType = "website", noindex = false, footerNote = false } = Astro.props;
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const imageUrl = new URL(image, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <script is:inline>
+      document.documentElement.classList.replace("no-js", "js");
+    </script>
+    <meta name="theme-color" content="#0B0D14" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.name} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={pageUrl} />}
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="preload" href={geistRegular} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={geistBold} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={geistMonoRegular} as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+  </head>
+
+  <body>
+    <SiteHeader />
+    <slot />
+    <SiteFooter showNote={footerNote} />
+  </body>
+</html>

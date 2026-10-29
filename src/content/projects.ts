@@ -17,7 +17,8 @@ export type ProjectCategory = "development" | "ux";
 export type ImageFrame = "phone" | "screen" | "plain";
 
 export interface ProjectImage {
-  src: string;
+  /** An image imported from src/assets; astro:assets resizes it and converts it to WebP at build time. */
+  src: ImageMetadata;
   alt: string;
   frame: ImageFrame;
 }

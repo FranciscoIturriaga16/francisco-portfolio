@@ -31,6 +31,11 @@
     @apply border-border;
   }
 
+  /* The hidden attribute always wins over display utilities (the project filter and the menu rely on it). */
+  [hidden] {
+    display: none !important;
+  }
+
   body {
     @apply bg-background font-sans text-[17px] leading-[1.65] text-foreground antialiased;
   }
@@ -41,14 +46,21 @@
     border-radius: 6px;
   }
 
-  /* Keep anchored sections clear of the sticky header (it wraps to two rows on small screens). */
-  [id] {
-    scroll-margin-top: 128px;
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
-  @media (min-width: 640px) {
-    [id] {
-      scroll-margin-top: 88px;
+  /* Keep anchored sections clear of the sticky header (and the notch, in landscape on phones). */
+  [id] {
+    scroll-margin-top: calc(88px + env(safe-area-inset-top));
+  }
+
+  /* Without JavaScript the mobile header shows its links, wrapped to two rows. */
+  @media (max-width: 767px) {
+    .no-js [id] {
+      scroll-margin-top: calc(128px + env(safe-area-inset-top));
     }
   }
 }

@@ -1,5 +1,5 @@
 export interface SiteImage {
-  src: string;
+  src: ImageMetadata;
   alt: string;
 }
 
@@ -27,6 +27,14 @@ export interface SiteContent {
     text: string;
   };
   footerNote: string;
+  /** Homepage title, description and link preview. Case study pages build theirs from the project. */
+  seo: {
+    title: string;
+    description: string;
+    /** Path under public/. */
+    image: string;
+    imageAlt: string;
+  };
 }
 
 export const site: SiteContent = {
@@ -57,4 +65,11 @@ export const site: SiteContent = {
     text: "I'm always open to new projects, creative ideas, and opportunities to be part of your vision.",
   },
   footerNote: "Thanks for stopping by",
+  seo: {
+    title: "Francisco Iturriaga | Designer and Developer",
+    description:
+      "Computer Science student at the University of Florida and founder of HAVEN. I design and build products from start to finish.",
+    image: "/og-image.png",
+    imageAlt: "Francisco Iturriaga, designer and developer",
+  },
 };

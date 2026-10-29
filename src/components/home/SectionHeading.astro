@@ -1,0 +1,18 @@
+---
+import Eyebrow from "@/components/common/Eyebrow.astro";
+
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+}
+
+const { id, eyebrow, title } = Astro.props;
+---
+
+<div>
+  <Eyebrow>{eyebrow}</Eyebrow>
+  <h2 id={id} class="mt-2 text-[clamp(32px,4vw,44px)] font-bold leading-[1.1] tracking-[-0.03em]">
+    {title}
+  </h2>
+</div>
