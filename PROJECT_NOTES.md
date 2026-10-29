@@ -6,8 +6,8 @@ Francisco Iturriaga's personal portfolio: a homepage (hero, projects, about, exp
 Stack: Astro 7 (static output, Vite 8 underneath), TypeScript (Astro strict preset), Tailwind CSS 3 through PostCSS, @lucide/astro icons, self hosted Geist and Geist Mono via @fontsource. Every page is generated HTML; the only client JavaScript is the mobile menu and the project filter. No backend or database. Public repo: https://github.com/FranciscoIturriaga16/francisco-portfolio (branch `main`). Deploys to Vercel from `main`; site URL https://franciscoiturriaga.com.
 
 ## Current status
-- 2026-10-29: section spacing moved into CSS variables and tightened on phones. At 768, 1024 and 1440 px every page is pixel identical to before; phone pages are 280 to 560 px shorter. Anchor links, build, check and lint verified.
-- 2026-10-29: migrated from the React SPA to Astro, merged to `main` and pushed (commit `ff1c5da`). Whether the Vercel deploy succeeded has not been checked. `npm run build`, `npm run check` and `npm run lint` pass. The `astro-migration` branch is merged and only exists locally.
+- 2026-10-29: section spacing moved into CSS variables and tightened on phones. At 768, 1024 and 1440 px every page is pixel identical to before; phone pages are 280 to 560 px shorter. Anchor links, build, check and lint verified. Comparison screenshots were temporary and not kept.
+- 2026-10-29: migrated from the React SPA to Astro and pushed to `main`. Latest push is `77161bf` (spacing variables); whether the Vercel deploys succeeded has not been checked. `npm run build`, `npm run check` and `npm run lint` pass. The `astro-migration` branch is merged and only exists locally.
 - Tested with Playwright at 320, 375, 390, 414, 768, 1024, 1440 and 844x390: no horizontal scroll and no console errors on any page. Desktop and tablet pages have the same heights as before the migration. Menu, filter, Next project cycle, 404 and `/resume.pdf` all tested.
 - `public/resume.pdf` is current (it includes HAVEN and The-Versus).
 - New project images are planned; the existing ones are still in place.
