@@ -1,0 +1,75 @@
+---
+import { Image } from "astro:assets";
+import { ArrowRight } from "@lucide/astro";
+import type { Project } from "@/content/projects";
+import { cardSurface, stretchedLink } from "@/components/common/styles";
+import ExternalProjectLink from "@/components/common/ExternalProjectLink.astro";
+import { cn } from "@/lib/utils";
+import ProjectTags from "./ProjectTags.astro";
+
+const { project } = Astro.props as { project: Project };
+const phones = project.caseStudyImages.filter((image) => image.frame === "phone").slice(0, 2);
+---
+
+<article
+  data-category={project.category}
+  class={cn(
+    cardSurface,
+    "group relative mt-10 flex flex-wrap overflow-hidden rounded-3xl text-foreground transition-colors focus-within:border-border-strong hover:border-border-strong",
+  )}
+>
+  <div class="flex min-h-[280px] min-w-0 shrink grow-[999] basis-[520px] items-end justify-center gap-5 bg-raised px-6 pt-12 sm:min-h-[400px]">
+    {
+      phones.length > 0 ? (
+        phones.map((image, index) => (
+          <div
+            class={cn(
+              "min-w-0 max-w-[180px] flex-1 overflow-hidden rounded-t-[26px] border-[6px] border-b-0 border-frame bg-[#0E0F12]",
+              index === 0 ? "aspect-[180/340]" : "aspect-[180/300]",
+            )}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              widths={[180, 360]}
+              sizes="180px"
+              loading="eager"
+              decoding="async"
+              class="block h-full w-full object-cover object-top"
+            />
+          </div>
+        ))
+      ) : (
+        <Image
+          src={project.cardImage.src}
+          alt={project.cardImage.alt}
+          widths={[600, 1000, 1400]}
+          sizes="(min-width: 1120px) 680px, 100vw"
+          loading="eager"
+          decoding="async"
+          class="block max-h-[352px] w-full rounded-t-2xl object-cover object-top"
+        />
+      )
+    }
+  </div>
+  <div class="flex shrink grow basis-[340px] flex-col justify-center gap-4 p-10">
+    <ProjectTags project={project} showFeatured />
+    <h3 class="text-4xl font-bold leading-[1.1] tracking-[-0.03em]">
+      <a href={`/case-study/${project.id}`} class={stretchedLink("after:rounded-3xl")}>
+        {project.title}
+      </a>
+    </h3>
+    <p class="text-muted">{project.summary}</p>
+    <p class="font-mono text-[13px] text-label">{project.stack.join(" · ")}</p>
+    <div class="mt-2 flex flex-wrap items-center gap-x-6 gap-y-1">
+      <span aria-hidden="true" class="inline-flex items-center gap-2 font-medium text-accent">
+        Read case study
+        <ArrowRight
+          class="size-[18px] transition-transform group-focus-within:translate-x-1 group-hover:translate-x-1"
+          stroke-width={2.2}
+        />
+      </span>
+      {project.link && <ExternalProjectLink link={project.link} />}
+    </div>
+  </div>
+</article>

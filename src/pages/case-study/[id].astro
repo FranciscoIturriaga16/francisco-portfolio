@@ -1,0 +1,38 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { container } from "@/components/common/styles";
+import CaseHero from "@/components/case-study/CaseHero.astro";
+import CaseSectionBlock from "@/components/case-study/CaseSectionBlock.astro";
+import NextProject from "@/components/case-study/NextProject.astro";
+import { caseStudies } from "@/content/caseStudies";
+import { projects } from "@/content/projects";
+import { site } from "@/content/site";
+
+/** One page per project that has a case study, in the homepage order. */
+export const getStaticPaths = (() =>
+  projects.flatMap((project, index) => {
+    const caseStudy = caseStudies.find((item) => item.projectId === project.id);
+    if (!caseStudy) return [];
+    // The last project wraps around to the first.
+    const nextProject = projects[(index + 1) % projects.length]!;
+    return [{ params: { id: project.id }, props: { project, caseStudy, nextProject, index } }];
+  })) satisfies GetStaticPaths;
+
+const { project, caseStudy, nextProject, index } = Astro.props;
+const pad = (value: number) => String(value).padStart(2, "0");
+---
+
+<BaseLayout
+  title={`${project.title} | ${site.name}`}
+  description={project.summary}
+  image={`/og/${project.id}.png`}
+  imageAlt={`${project.title}, a case study by ${site.name}`}
+  ogType="article"
+>
+  <main id="main" class={container}>
+    <CaseHero project={project} caseStudy={caseStudy} number={pad(index + 1)} />
+    {caseStudy.sections.map((section, position) => <CaseSectionBlock number={pad(position + 1)} section={section} />)}
+    <NextProject project={nextProject} />
+  </main>
+</BaseLayout>

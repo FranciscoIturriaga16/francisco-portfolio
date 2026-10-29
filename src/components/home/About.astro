@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+import Eyebrow from "@/components/common/Eyebrow.astro";
+import { site } from "@/content/site";
+import { skillGroups } from "@/content/resume";
+import { cn } from "@/lib/utils";
+
+const [lead, ...rest] = site.about.paragraphs;
+const { photo } = site;
+---
+
+<section
+  id="about"
+  aria-labelledby="about-title"
+  class={cn("flex flex-wrap gap-x-16 gap-y-8 pt-[140px]", !photo && "flex-col gap-y-5")}
+>
+  <div class={cn(photo && "shrink grow basis-[260px]")}>
+    <Eyebrow as="h2" id="about-title">About</Eyebrow>
+    {
+      photo && (
+        <Image
+          src={photo.src}
+          alt={photo.alt}
+          widths={[280, 560]}
+          sizes="280px"
+          loading="lazy"
+          decoding="async"
+          class="mt-5 aspect-[4/5] w-full max-w-[280px] rounded-[20px] border border-border bg-raised object-cover"
+        />
+      )
+    }
+  </div>
+
+  <div class="min-w-0 shrink grow-[999] basis-[520px]">
+    <p class="text-[clamp(22px,2.6vw,28px)] leading-[1.45] tracking-[-0.015em]">{lead}</p>
+    {rest.map((paragraph) => <p class="mt-6 text-muted">{paragraph}</p>)}
+
+    <div class="mt-12 flex flex-col gap-6">
+      {
+        skillGroups.map((group) => (
+          <div>
+            <Eyebrow as="h3" tone="label" size="sm">
+              {group.label}
+            </Eyebrow>
+            <ul class="mt-2.5 flex flex-wrap gap-2">
+              {group.skills.map((skill) => (
+                <li class="rounded-full bg-raised px-3.5 py-1.5 text-[15px] leading-snug">{skill}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      <p class="text-[15px] text-label">{site.about.languages}</p>
+    </div>
+  </div>
+</section>

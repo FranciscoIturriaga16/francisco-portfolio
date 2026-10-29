@@ -1,0 +1,117 @@
+---
+import { Menu, X } from "@lucide/astro";
+import { site } from "@/content/site";
+import { container, pillButton } from "@/components/common/styles";
+import Monogram from "@/components/common/Monogram.astro";
+import { cn } from "@/lib/utils";
+
+const navLinks = [
+  { label: "Work", href: "/#work" },
+  { label: "About", href: "/#about" },
+  { label: "Experience", href: "/#experience" },
+];
+
+const panelLinkClass = "inline-flex min-h-11 min-w-11 items-center text-muted transition-colors hover:text-foreground";
+---
+
+<header
+  data-site-header
+  class="sticky top-0 z-40 border-b border-border bg-background/85 pt-[env(safe-area-inset-top)] backdrop-blur-md"
+>
+  <nav aria-label="Main" class={cn(container, "flex flex-wrap items-center justify-between gap-4 py-4")}>
+    <a
+      href="/"
+      data-brand
+      class="inline-flex min-h-11 items-center gap-2.5 text-base font-semibold tracking-[-0.01em] text-foreground transition-colors hover:text-accent-soft-foreground md:min-h-0"
+    >
+      <Monogram class="size-7" />
+      {site.name}
+    </a>
+
+    <!-- Desktop links. Below 768 px they move into the menu panel, except when JavaScript is off. -->
+    <ul
+      class="hidden flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[13px] uppercase tracking-[0.06em] sm:gap-x-7 md:flex [.no-js_&]:flex"
+    >
+      {
+        navLinks.map((link) => (
+          <li>
+            <a href={link.href} class="text-nav transition-colors hover:text-foreground">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          href="/#contact"
+          class="inline-block rounded-full bg-accent px-4 py-2 font-medium text-background transition-colors hover:bg-accent-soft-foreground"
+        >
+          Contact
+        </a>
+      </li>
+    </ul>
+
+    <button
+      type="button"
+      data-menu-button
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="-mr-2.5 inline-flex size-11 items-center justify-center rounded-full text-foreground transition-colors hover:bg-raised md:hidden [.no-js_&]:hidden"
+    >
+      <span data-icon="open" aria-hidden="true" class="flex"><Menu class="size-6" /></span>
+      <span data-icon="close" aria-hidden="true" class="flex" hidden><X class="size-6" /></span>
+    </button>
+  </nav>
+</header>
+
+<!-- Full screen menu below the header, phones and small tablets only. Placed under the header by menu.ts. -->
+<div
+  id="mobile-menu"
+  hidden
+  data-open="false"
+  class="fixed inset-x-0 bottom-0 top-0 z-30 translate-y-[-8px] overflow-y-auto overscroll-contain bg-background opacity-0 transition duration-200 ease-out data-[open=true]:translate-y-0 data-[open=true]:opacity-100 motion-reduce:transition-none md:hidden"
+>
+  <nav
+    aria-label="Menu"
+    class={cn(container, "flex flex-col pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-8")}
+  >
+    <ul class="flex flex-col gap-1">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="flex min-h-14 items-center text-[28px] font-semibold leading-tight tracking-[-0.02em] text-foreground transition-colors hover:text-accent-soft-foreground"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a href="/#contact" class={pillButton("primary", "mt-8 w-full justify-center")}>Contact</a>
+    <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-1 text-[15px]">
+      <li><a href={`mailto:${site.email}`} class={panelLinkClass}>Email</a></li>
+      <li>
+        <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer" class={panelLinkClass}>LinkedIn</a>
+      </li>
+      {
+        site.githubUrl && (
+          <li>
+            <a href={site.githubUrl} target="_blank" rel="noopener noreferrer" class={panelLinkClass}>
+              GitHub
+            </a>
+          </li>
+        )
+      }
+      <li>
+        <a href={site.resumePath} target="_blank" rel="noopener noreferrer" class={panelLinkClass}>Resume</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<script>
+  import "@/scripts/menu";
+</script>

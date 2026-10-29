@@ -1,0 +1,54 @@
+---
+import { categoryLabels, projects, type ProjectCategory } from "@/content/projects";
+import FeaturedProjectCard from "./FeaturedProjectCard.astro";
+import ProjectCard from "./ProjectCard.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+type Filter = "all" | ProjectCategory;
+
+const filters: { value: Filter; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "development", label: categoryLabels.development },
+  { value: "ux", label: categoryLabels.ux },
+];
+
+// Every project is in the HTML; scripts/projectFilter.ts only hides and shows them.
+const featured = projects.find((project) => project.featured);
+const rest = projects.filter((project) => project !== featured);
+---
+
+<section id="work" aria-labelledby="work-title" class="pt-6">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <SectionHeading id="work-title" eyebrow="Selected work" title="Projects" />
+    <div role="group" aria-label="Filter projects" data-project-filter class="flex flex-wrap gap-2 [.no-js_&]:hidden">
+      {
+        filters.map(({ value, label }) => (
+          <button
+            type="button"
+            data-filter={value}
+            aria-pressed={value === "all" ? "true" : "false"}
+            class="min-h-11 rounded-full border px-[18px] text-[15px] font-medium transition-colors aria-pressed:border-foreground aria-pressed:bg-foreground aria-pressed:text-background aria-[pressed=false]:border-border-strong aria-[pressed=false]:text-secondary aria-[pressed=false]:hover:border-label aria-[pressed=false]:hover:text-foreground md:min-h-10"
+          >
+            {label}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  {featured && <FeaturedProjectCard project={featured} />}
+
+  <ul class="mt-6 grid list-none grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-6">
+    {
+      rest.map((project) => (
+        <li data-category={project.category} class="flex">
+          <ProjectCard project={project} />
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<script>
+  import "@/scripts/projectFilter";
+</script>

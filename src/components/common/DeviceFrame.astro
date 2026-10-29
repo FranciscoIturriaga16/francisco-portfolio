@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+import type { ProjectImage } from "@/content/projects";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  image: ProjectImage;
+  class?: string;
+  /** Widths to generate, in CSS pixels at 1x and 2x of the largest rendered size. */
+  widths: number[];
+  sizes: string;
+  /** Images above the fold load eagerly; everything else is lazy. */
+  eager?: boolean;
+}
+
+/**
+ * Wraps a screenshot in the frame chosen in the content files.
+ * Sizing (width, height or aspect ratio) comes from class.
+ */
+const { image, class: className, widths, sizes, eager = false } = Astro.props;
+const plain = image.frame === "plain";
+---
+
+{
+  plain ? (
+    <div class={className}>
+      <Image
+        src={image.src}
+        alt={image.alt}
+        widths={widths}
+        sizes={sizes}
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+        class="block h-full w-full object-contain"
+      />
+    </div>
+  ) : (
+    <div
+      class={cn(
+        "overflow-hidden border-[6px] border-frame bg-[#0E0F12]",
+        image.frame === "phone" ? "rounded-[32px]" : "rounded-2xl",
+        className,
+      )}
+    >
+      <Image
+        src={image.src}
+        alt={image.alt}
+        widths={widths}
+        sizes={sizes}
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+        class="block h-full w-full object-cover object-top"
+      />
+    </div>
+  )
+}

@@ -1,0 +1,28 @@
+---
+import { ArrowLeft } from "@lucide/astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Eyebrow from "@/components/common/Eyebrow.astro";
+import { container, pillButton } from "@/components/common/styles";
+import { site } from "@/content/site";
+import { cn } from "@/lib/utils";
+---
+
+<BaseLayout
+  title={`Page not found | ${site.name}`}
+  description="The page you're looking for doesn't exist or has moved."
+  image={site.seo.image}
+  imageAlt={site.seo.imageAlt}
+  noindex
+>
+  <main id="main" class={cn(container, "pb-12 pt-[120px]")}>
+    <Eyebrow>Error 404</Eyebrow>
+    <h1 class="mt-4 text-[clamp(44px,7vw,84px)] font-bold leading-[1.02] tracking-[-0.04em]">Page not found</h1>
+    <p class="mt-6 max-w-[560px] text-[clamp(18px,2vw,21px)] text-muted">
+      The page you're looking for doesn't exist or has moved.
+    </p>
+    <a href="/" class={pillButton("primary", "mt-10")}>
+      <ArrowLeft aria-hidden="true" class="size-[18px]" stroke-width={2.2} />
+      Back to home
+    </a>
+  </main>
+</BaseLayout>

@@ -1,0 +1,108 @@
+---
+import { ArrowLeft, ArrowUpRight } from "@lucide/astro";
+import Eyebrow from "@/components/common/Eyebrow.astro";
+import Tag from "@/components/common/Tag.astro";
+import DeviceFrame from "@/components/common/DeviceFrame.astro";
+import { pillButton } from "@/components/common/styles";
+import { statusDots, type Project } from "@/content/projects";
+import type { CaseStudy } from "@/content/caseStudies";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  project: Project;
+  caseStudy: CaseStudy;
+  /** Two digit position of the project, for example "01". */
+  number: string;
+}
+
+/** Phone sizes from the design: the middle phone is slightly larger. */
+const phoneSizes = [
+  "max-w-[220px] aspect-[220/460]",
+  "max-w-[240px] aspect-[240/500]",
+  "max-w-[220px] aspect-[220/460] hidden sm:block",
+];
+
+const { project, caseStudy, number } = Astro.props;
+const images = project.caseStudyImages;
+const phones = images.filter((image) => image.frame === "phone");
+
+const meta = [
+  { label: "Role", value: project.role },
+  { label: "Stack", value: caseStudy.stack ?? project.stack.join(", ") },
+  { label: "Platform", value: caseStudy.platform },
+];
+---
+
+<section aria-labelledby="case-title" class="pb-12 pt-14">
+  <a
+    href="/#work"
+    class="inline-flex min-h-11 items-center gap-2 text-[15px] text-nav transition-colors hover:text-foreground"
+  >
+    <ArrowLeft aria-hidden="true" class="size-4" />
+    All projects
+  </a>
+  <div class="mt-8 flex flex-wrap items-center gap-3">
+    <Eyebrow>Case study · {number}</Eyebrow>
+    {
+      project.status && (
+        <Tag dot={statusDots[project.status]} dotSize="md" class="gap-2">
+          {project.status}
+        </Tag>
+      )
+    }
+  </div>
+  <h1 id="case-title" class="mt-4 text-[clamp(48px,8vw,96px)] font-bold leading-none tracking-[-0.04em]">
+    {project.title}
+  </h1>
+  <p class="mt-6 max-w-[720px] text-[clamp(20px,2.4vw,26px)] leading-[1.4] tracking-[-0.01em] text-secondary">
+    {caseStudy.tagline}
+  </p>
+  {
+    project.link && (
+      <a href={project.link.url} target="_blank" rel="noopener noreferrer" class={pillButton("outline", "mt-8")}>
+        Visit {project.link.label}
+        <ArrowUpRight aria-hidden="true" class="size-[18px]" stroke-width={2.2} />
+        <span class="sr-only">(opens in a new tab)</span>
+      </a>
+    )
+  }
+
+  <dl class="mt-12 grid grid-cols-[repeat(auto-fit,minmax(min(200px,100%),1fr))] gap-px overflow-hidden rounded-2xl border border-border bg-border">
+    {
+      meta.map(({ label, value }) => (
+        <div class="bg-panel px-6 py-5">
+          <dt class="font-mono text-xs uppercase tracking-[0.08em] text-label">{label}</dt>
+          <dd class="mt-1.5 text-base">{value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>
+
+<figure class="flex items-end justify-center gap-4 rounded-3xl border border-border bg-surface px-6 py-12 sm:gap-8">
+  {
+    phones.length > 0
+      ? phones
+          .slice(0, 3)
+          .map((image, index) => (
+            <DeviceFrame
+              image={image}
+              eager
+              widths={[240, 480]}
+              sizes="240px"
+              class={cn("min-w-0 flex-1", phoneSizes[index], index === 1 && "rounded-[34px]")}
+            />
+          ))
+      : images
+          .slice(0, 1)
+          .map((image) => (
+            <DeviceFrame
+              image={image}
+              eager
+              widths={[480, 880, 1320, 1760]}
+              sizes="(min-width: 1120px) 880px, calc(100vw - 98px)"
+              class="w-full max-w-[880px]"
+            />
+          ))
+  }
+</figure>

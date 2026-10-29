@@ -1,0 +1,26 @@
+---
+import { ArrowDown, Download } from "@lucide/astro";
+import { site } from "@/content/site";
+import { pillButton } from "@/components/common/styles";
+---
+
+<section aria-labelledby="hero-title" class="pb-24 pt-[120px]">
+  <p class="inline-flex items-center gap-2 rounded-full border border-border-strong px-3.5 py-1.5 text-sm text-secondary">
+    <span aria-hidden="true" class="size-2 rounded-full bg-green"></span>
+    {site.hero.badge}
+  </p>
+  <h1 id="hero-title" class="mt-7 max-w-[960px] text-[clamp(44px,7vw,84px)] font-bold leading-[1.02] tracking-[-0.04em]">
+    {site.hero.title} <span class="text-accent">{site.hero.titleAccent}</span>
+  </h1>
+  <p class="mt-7 max-w-[620px] text-[clamp(18px,2vw,21px)] leading-[1.55] text-muted">{site.hero.subtitle}</p>
+  <div class="mt-10 flex flex-wrap gap-3">
+    <a href="/#work" class={pillButton("primary")}>
+      View my work
+      <ArrowDown aria-hidden="true" class="size-[18px]" stroke-width={2.2} />
+    </a>
+    <a href={site.resumePath} download class={pillButton("outline")}>
+      Download resume
+      <Download aria-hidden="true" class="size-[18px]" stroke-width={2} />
+    </a>
+  </div>
+</section>

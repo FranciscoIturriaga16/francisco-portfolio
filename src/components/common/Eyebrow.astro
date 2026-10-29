@@ -1,0 +1,28 @@
+---
+import type { HTMLTag } from "astro/types";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  /** Element to render, so the label can double as a heading. Defaults to a paragraph. */
+  as?: HTMLTag;
+  tone?: "accent" | "label";
+  size?: "sm" | "md";
+  class?: string;
+  id?: string;
+}
+
+/** Small uppercase monospace label that sits above headings. */
+const { as: Component = "p", tone = "accent", size = "md", class: className, id } = Astro.props;
+---
+
+<Component
+  id={id}
+  class={cn(
+    "font-mono font-normal uppercase tracking-[0.08em]",
+    size === "md" ? "text-[13px]" : "text-xs",
+    tone === "accent" ? "text-accent" : "text-label",
+    className,
+  )}
+>
+  <slot />
+</Component>

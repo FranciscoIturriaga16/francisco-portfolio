@@ -1,0 +1,46 @@
+---
+import { site } from "@/content/site";
+import { container } from "@/components/common/styles";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  /** Shows the short sign off after the copyright line (homepage only in the design). */
+  showNote?: boolean;
+}
+
+const { showNote = false } = Astro.props;
+
+// Taller tap targets on phones; unchanged from 768 px up.
+const linkClass = "inline-flex min-h-11 min-w-11 items-center text-muted transition-colors hover:text-foreground md:min-h-0 md:min-w-0";
+---
+
+<footer class="mt-24 border-t border-border">
+  <div
+    class={cn(
+      container,
+      "flex flex-wrap items-center justify-between gap-4 pb-[max(2rem,env(safe-area-inset-bottom))] pt-8 text-[15px] text-label",
+    )}
+  >
+    <p>
+      © {new Date().getFullYear()} {site.name}{showNote && ` · ${site.footerNote}`}
+    </p>
+    <ul class="flex flex-wrap gap-x-6 gap-y-1 md:gap-6">
+      <li><a href={`mailto:${site.email}`} class={linkClass}>Email</a></li>
+      <li>
+        <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer" class={linkClass}>LinkedIn</a>
+      </li>
+      {
+        site.githubUrl && (
+          <li>
+            <a href={site.githubUrl} target="_blank" rel="noopener noreferrer" class={linkClass}>
+              GitHub
+            </a>
+          </li>
+        )
+      }
+      <li>
+        <a href={site.resumePath} target="_blank" rel="noopener noreferrer" class={linkClass}>Resume</a>
+      </li>
+    </ul>
+  </div>
+</footer>
