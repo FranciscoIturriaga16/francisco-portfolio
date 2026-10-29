@@ -10,6 +10,7 @@ Stack: Vite 5, React 18, TypeScript (non-strict), Tailwind CSS 3, React Router 6
 - `npm run build` and `npm run lint` pass. Tested in headless Chrome at 375, 768 and 1440 px: no horizontal scroll, no broken images, no console errors; filters and the next project cycle work.
 - `public/resume.pdf` is current (it includes HAVEN and The-Versus) and is committed.
 - New project images are planned; the existing ones are still in place.
+- All work is committed and pushed to `origin/main` (last push 2026-10-29). Whether Vercel picked it up has not been checked from here.
 
 ## Recent changes
 - 2026-10-29: Replaced the old favicon with the FI monogram (`public/favicon.svg`, `.ico`, `favicon-32.png`, `apple-touch-icon.png`) and added `public/og-image.png`; new meta description; monogram in the nav (`src/components/common/Monogram.tsx`).
@@ -18,11 +19,7 @@ Stack: Vite 5, React 18, TypeScript (non-strict), Tailwind CSS 3, React Router 6
 - 2026-10-29: Created the public GitHub repo and pushed `main`; added `vercel.json` (SPA rewrite) and `.env` ignores; replaced `public/resume.pdf` with the new resume. Secret scan of full history was clean.
 - 2026-10-13: Fixed mobile layout of the featured card phones and the contact email button; opted in to React Router v7 future flags to silence console warnings.
 - 2026-10-13: Removed old components, 48 unused shadcn/ui files, hooks, `App.css`, `placeholder.svg`, the site builder's config and 134 unused npm packages. Rewrote README.
-- 2026-10-13: Rebuilt the case study page as one reusable template driven by content; restyled the 404 page.
-- 2026-10-13: Rebuilt the homepage to match the design.
-- 2026-10-13: Added the typed content layer in `src/content/`.
-- 2026-10-13: New design system: Geist and Geist Mono fonts, dark palette as CSS variables, glass and glow styles removed.
-- 2026-10-13: Moved the design HTML references into `design/`; switched from bun to npm.
+- 2026-10-13: Redesign: new design system (Geist fonts, dark palette as CSS variables), typed content layer in `src/content/`, homepage and reusable case study template rebuilt to match `design/home-design.html` and `design/case-study-haven-design.html`; switched from bun to npm.
 
 ## Decisions
 - All copy and data live in `src/content/` (`site.ts`, `projects.ts`, `caseStudies.ts`, `resume.ts`). Components only render them. Edit content there, not in JSX.
@@ -45,6 +42,7 @@ Stack: Vite 5, React 18, TypeScript (non-strict), Tailwind CSS 3, React Router 6
 ## Next steps
 - [ ] Add the GitHub URL in `src/content/site.ts` (`githubUrl`, marked TODO).
 - [ ] Optionally add an About photo in `src/content/site.ts` (`photo`; the comment there explains how).
+- [ ] Check the live site after the Vercel deploy: favicon (hard refresh), link preview image, HAVEN and The-Versus case studies on a phone.
 - [ ] Add new project images (planned).
 - [ ] Once the domain is final, make `og:image` and `twitter:image` in `index.html` absolute URLs; some crawlers ignore relative image paths.
 - [ ] Optionally compress the large PNGs in `src/assets/` (several are 500 to 800 KB).
@@ -55,3 +53,6 @@ Stack: Vite 5, React 18, TypeScript (non-strict), Tailwind CSS 3, React Router 6
 - Dev server runs on port 8080 (`npm run dev`).
 - Typecheck with `npx tsc --noEmit -p tsconfig.app.json`.
 - Tailwind classes are built from strings in `src/components/common/styles.ts`; keep full class names there so Tailwind can detect them.
+- `pdftotext` comes from Homebrew `poppler` (installed 2026-10-29); use it to check what `public/resume.pdf` says.
+- The icon and OG image generator was a throwaway `playwright-core` script outside the repo, driving the installed Google Chrome. To regenerate, render `public/favicon.svg` again the same way (apple touch icon: square #161A27 tile with no rounded corners or border).
+- For layout checks, run `npx vite preview --port 4173` and test with headless Chrome at 375, 768 and 1440 px.
