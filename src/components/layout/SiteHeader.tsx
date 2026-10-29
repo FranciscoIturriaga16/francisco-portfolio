@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { site } from "@/content/site";
 import { container } from "@/components/common/styles";
+import Monogram from "@/components/common/Monogram";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -17,8 +18,9 @@ const SiteHeader = () => (
     >
       <Link
         to="/"
-        className="text-base font-semibold tracking-[-0.01em] text-foreground transition-colors hover:text-accent-soft-foreground"
+        className="inline-flex items-center gap-2.5 text-base font-semibold tracking-[-0.01em] text-foreground transition-colors hover:text-accent-soft-foreground"
       >
+        <Monogram className="size-7" />
         {site.name}
       </Link>
       <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[13px] uppercase tracking-[0.06em] sm:gap-x-7">
