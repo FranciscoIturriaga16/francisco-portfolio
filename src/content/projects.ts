@@ -22,16 +22,28 @@ export interface ProjectImage {
   frame: ImageFrame;
 }
 
+export type ProjectStatus = "In development" | "Paused";
+
+export interface ExternalLink {
+  url: string;
+  /** Short visible label, for example the domain. */
+  label: string;
+}
+
 export interface Project {
   /** Used in the URL: /case-study/:id */
   id: string;
   title: string;
   summary: string;
   category: ProjectCategory;
-  status?: string;
+  /** Extra labels shown on the card next to the category. They are not filters. */
+  tags?: string[];
+  status?: ProjectStatus;
   stack: string[];
   role: string;
   featured?: boolean;
+  /** Opens in a new tab, from the card and the case study hero. */
+  link?: ExternalLink;
   cardImage: ProjectImage;
   /** Shown at the top of the case study. The featured card uses the first two. */
   caseStudyImages: ProjectImage[];
@@ -42,35 +54,29 @@ export const categoryLabels: Record<ProjectCategory, string> = {
   ux: "UX design",
 };
 
+/** Status dot color: amber while active, muted when paused. */
+export const statusDots: Record<ProjectStatus, "amber" | "muted"> = {
+  "In development": "amber",
+  Paused: "muted",
+};
+
 /** Display order on the homepage and in the case study "Next project" cycle. */
 export const projects: Project[] = [
   {
     id: "haven",
     title: "HAVEN",
-    summary: "One platform where communities run themselves, and members manage every community from a single account.",
+    summary: "One platform where communities run themselves, with a mobile app, admin dashboard and integrated payments.",
     category: "development",
     status: "In development",
-    stack: ["React", "TypeScript", "Supabase"],
-    role: "Product design and full stack development",
+    stack: ["TypeScript", "React Native", "React", "Supabase", "Stripe"],
+    role: "Founder, product design and development",
     featured: true,
+    link: { url: "https://havencommunity.app", label: "havencommunity.app" },
     cardImage: { src: havenCard, alt: "HAVEN home screen with quick actions for booking, guests and events", frame: "screen" },
     caseStudyImages: [
       { src: havenMyCommunities, alt: "HAVEN My Communities screen listing the communities a member belongs to", frame: "phone" },
       { src: havenEvents, alt: "HAVEN Community Events screen", frame: "phone" },
       { src: havenUsage, alt: "HAVEN Usage Trends screen with community activity charts", frame: "phone" },
-    ],
-  },
-  {
-    id: "the-versus",
-    title: "The-Versus",
-    summary: "Compare anything, make better decisions.",
-    category: "development",
-    status: "In development",
-    stack: ["React", "TypeScript"],
-    role: "Product and UX design, content system design, operations",
-    cardImage: { src: theVersusCard, alt: "The-Versus home page with three live soccer matchups and their vote results", frame: "screen" },
-    caseStudyImages: [
-      { src: theVersusCard, alt: "The-Versus home page with three live soccer matchups and their vote results", frame: "screen" },
     ],
   },
   {
@@ -106,6 +112,20 @@ export const projects: Project[] = [
     role: "UX/UI design and prototyping",
     cardImage: { src: haydnCard, alt: "HAYDN marketing website landing page", frame: "screen" },
     caseStudyImages: [{ src: haydnCard, alt: "HAYDN marketing website landing page", frame: "screen" }],
+  },
+  {
+    id: "the-versus",
+    title: "The-Versus",
+    summary: "A football debate platform with a collectible card game, run with an AI agent.",
+    category: "development",
+    tags: ["AI and Automation"],
+    status: "Paused",
+    stack: ["React", "TypeScript", "Supabase", "Stripe", "OpenClaw"],
+    role: "Founder, product design and development",
+    cardImage: { src: theVersusCard, alt: "The-Versus home page with three football matchups and their vote results", frame: "screen" },
+    caseStudyImages: [
+      { src: theVersusCard, alt: "The-Versus home page with three football matchups and their vote results", frame: "screen" },
+    ],
   },
 ];
 

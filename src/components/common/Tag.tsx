@@ -5,11 +5,13 @@ interface TagProps {
   children: ReactNode;
   variant?: "outline" | "featured";
   /** Adds a colored status dot before the text. */
-  dot?: "amber" | "green";
+  dot?: "amber" | "green" | "muted";
   /** The case study hero uses a slightly larger dot. */
   dotSize?: "sm" | "md";
   className?: string;
 }
+
+const dotColors = { amber: "bg-amber", green: "bg-green", muted: "bg-label" };
 
 const Tag = ({ children, variant = "outline", dot, dotSize = "sm", className }: TagProps) => (
   <span
@@ -20,7 +22,7 @@ const Tag = ({ children, variant = "outline", dot, dotSize = "sm", className }: 
     )}
   >
     {dot && (
-      <span aria-hidden="true" className={cn("rounded-full", dotSize === "md" ? "size-2" : "size-1.5", dot === "amber" ? "bg-amber" : "bg-green")} />
+      <span aria-hidden="true" className={cn("rounded-full", dotSize === "md" ? "size-2" : "size-1.5", dotColors[dot])} />
     )}
     {children}
   </span>
