@@ -3,15 +3,15 @@ _Last updated: 2026-10-29_
 
 ## What this project is
 Francisco Iturriaga's personal portfolio: a homepage (hero, projects, about, experience, contact) and one case study page per project.
-Stack: Vite 5, React 18, TypeScript (non-strict), Tailwind CSS 3, React Router 6, lucide-react icons. Static single-page app with no backend or database. Originally generated with Lovable; all Lovable tooling has been removed. Not deployed yet, and the repo has no git remote.
+Stack: Vite 5, React 18, TypeScript (non-strict), Tailwind CSS 3, React Router 6, lucide-react icons. Static single-page app with no backend or database. Originally generated with Lovable; all Lovable tooling has been removed. Public repo: https://github.com/FranciscoIturriaga16/francisco-portfolio (branch `main`). Not deployed yet; `vercel.json` has the SPA rewrite.
 
 ## Current status
 - The redesign is done and committed: the homepage matches `design/home-design.html` and every `/case-study/:id` page matches `design/case-study-haven-design.html`.
 - `npm run build` and `npm run lint` both pass cleanly.
 - Tested in headless Chrome at 375, 768 and 1440 px: no horizontal scroll, no broken images, no console errors. Hash links (for example `/#work`) work when arriving from a case study.
-- Uncommitted: an untracked `FranciscoIturriaga_Resume copy.pdf` at the repo root (probably a stray copy; the live resume is `public/resume.pdf`).
 
 ## Recent changes
+- 2026-10-29: Replaced `public/resume.pdf` with the new resume. Pushed to GitHub; added `vercel.json` and `.env` ignores.
 - 2026-10-13: Fixed mobile layout of the featured card phones and the contact email button; opted in to React Router v7 future flags to silence console warnings.
 - 2026-10-13: Removed old components, 48 unused shadcn/ui files, hooks, `App.css`, `placeholder.svg`, Lovable config and 134 unused npm packages. Rewrote README.
 - 2026-10-13: Rebuilt the case study page as one reusable template driven by content; restyled the 404 page.
@@ -38,8 +38,7 @@ Stack: Vite 5, React 18, TypeScript (non-strict), Tailwind CSS 3, React Router 6
 - [ ] Add the GitHub URL in `src/content/site.ts` (`githubUrl`, marked TODO).
 - [ ] Optionally add an About photo in `src/content/site.ts` (`photo`; the comment there explains how).
 - [ ] Confirm the About sentence about Summer 2027 internships is still accurate.
-- [ ] Decide what to do with the untracked `FranciscoIturriaga_Resume copy.pdf` (replace `public/resume.pdf` or delete it).
-- [ ] Add a git remote and choose hosting, then deploy (needs SPA fallback so `/case-study/:id` URLs work on refresh).
+- [ ] Import the repo into Vercel (preset Vite, build `npm run build`, output `dist`) and deploy.
 - [ ] Optionally compress the large PNGs in `src/assets/` (several are 500 to 800 KB).
 
 ## Gotchas
