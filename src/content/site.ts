@@ -47,8 +47,8 @@ export const site: SiteContent = {
   },
   about: {
     paragraphs: [
-      "I'm a Computer Science student at the University of Florida with a UX/UI certificate from Flatiron School. I like owning a product from start to finish: talking to users, designing the flows, then writing the code.",
-      "Right now I'm building HAVEN and The-Versus, and I'm open to software engineering and product design internships for Summer 2027.",
+      "I'm a Computer Science student at the University of Florida and the founder of HAVEN, a community management platform. I build products from start to finish: talking to users, designing the flows, then writing the code, with a UX approach shaped by my background in psychology.",
+      "I'm open to software engineering and product design internships for Summer 2027.",
     ],
     languages: "Fluent in English and Spanish.",
   },

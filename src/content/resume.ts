@@ -19,32 +19,18 @@ export interface SkillGroup {
 /** Newest first. */
 export const experience: ExperienceItem[] = [
   {
-    period: "2024 to Present",
-    role: "Independent Developer",
-    organization: "Independent projects",
+    period: "2025",
+    role: "Digital Product Design Consultant",
+    organization: "Freelance",
     description:
-      "Designing and developing web and mobile apps from concept to implementation, with a focus on product development, usability and scalable architecture.",
-  },
-  {
-    period: "2022 to Present",
-    role: "Independent Designer",
-    organization: "Product & UX design",
-    description:
-      "Creating experiences centered on users through research, wireframing, prototyping and interface design.",
+      "Designed presentations and digital materials for healthcare professionals, turning complex information into clear visual narratives.",
   },
   {
     period: "2022",
     role: "Operations and Technology Intern",
     organization: "Banco Venezolano de Crédito · Caracas, Venezuela",
     description:
-      "Rotated across operations, technology and client service teams, gaining exposure to internal systems, security processes and everyday financial workflows.",
-  },
-  {
-    period: "Freelance",
-    role: "Digital Product Design Consultant",
-    organization: "By project",
-    description:
-      "Designed presentations and digital materials for healthcare professionals, turning complex information into clear, structured visual narratives.",
+      "Rotated across operational, technology and client teams within a financial institution, gaining exposure to internal systems, security processes and real operational workflows.",
   },
 ];
 
@@ -55,10 +41,13 @@ export const education: EducationItem[] = [
 ];
 
 export const skillGroups: SkillGroup[] = [
-  { label: "Code", skills: ["TypeScript", "JavaScript", "React", "Python", "C++", "HTML & CSS"] },
-  { label: "Tools & services", skills: ["Supabase", "Stripe", "Resend", "GitHub", "Figma", "VS Code"] },
+  { label: "Programming", skills: ["TypeScript", "JavaScript", "Python", "C++", "SQL", "R", "HTML/CSS"] },
   {
-    label: "UX & product",
-    skills: ["UX research", "Wireframing", "Prototyping", "User flows", "Information architecture"],
+    label: "Tools",
+    skills: ["React", "React Native", "Expo", "Supabase", "PostgreSQL", "Stripe", "Figma", "GitHub", "Resend"],
+  },
+  {
+    label: "UX and Product",
+    skills: ["UX/UI Design", "Wireframing", "Prototyping", "User Flows", "Information Architecture"],
   },
 ];
