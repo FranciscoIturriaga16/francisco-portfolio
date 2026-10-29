@@ -12,7 +12,7 @@ const { photo } = site;
 <section
   id="about"
   aria-labelledby="about-title"
-  class={cn("flex flex-wrap gap-x-16 gap-y-8 pt-[140px]", !photo && "flex-col gap-y-5")}
+  class={cn("flex flex-wrap gap-x-16 gap-y-8 pt-[var(--space-section)]", !photo && "flex-col gap-y-5")}
 >
   <div class={cn(photo && "shrink grow basis-[260px]")}>
     <Eyebrow as="h2" id="about-title">About</Eyebrow>

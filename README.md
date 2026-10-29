@@ -31,6 +31,19 @@ npm run lint
 2. Add the project to `projects` in `projects.ts`.
 3. Add its case study to `caseStudies.ts` with the same `projectId`. The page, the Next project link and the preview image are generated from it.
 
+### Tuning spacing
+
+The big vertical gaps are CSS variables at the top of `src/index.css`. Each one has a phone value (below 768 px) in the first `:root` block and a tablet and desktop value in the `@media (min-width: 768px)` block.
+
+| Variable | Controls | Phone | 768 px and up |
+| --- | --- | --- | --- |
+| `--space-section` | Gap between homepage sections (Projects, About, Experience, Contact) and between case study sections | 64px | 140px |
+| `--space-hero-top` | Space above the hero content (homepage, case study, 404) | 48px | 120px |
+| `--space-hero-bottom` | Space below the hero content | 48px | 96px |
+| `--space-block` | Larger gaps inside a page: above the Next project card, the footer and case study figures | 64px | 96px |
+
+Edit only these four. The `-case`, `-next` and `-figures` variables below them are derived: on phones they equal the base value, and from 768 px up they keep the original proportions (case study sections are 6/7 of `--space-section`, the case study hero is shorter than the homepage hero, and so on), so changing a base value scales them too.
+
 ## Deploy
 
 Vercel builds from `main` with the Astro preset: build command `npm run build`, output directory `dist`.

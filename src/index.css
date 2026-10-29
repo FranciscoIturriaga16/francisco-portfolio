@@ -27,6 +27,49 @@
     color-scheme: dark;
   }
 
+  /*
+   * Vertical spacing between sections and large blocks. Edit the four values below (phones) and in the
+   * 768 px block (tablet and desktop). The first value applies below 768 px.
+   */
+  :root {
+    /* Gap between homepage sections (Projects, About, Experience, Contact) and between case study sections. */
+    --space-section: 64px;
+    /* Space above the hero content (homepage hero, case study hero, 404 page). */
+    --space-hero-top: 48px;
+    /* Space below the hero content (before Projects on the homepage, before the hero image on case studies). */
+    --space-hero-bottom: 48px;
+    /* Larger gaps inside a page: above the Next project card, above the footer, above case study figures. */
+    --space-block: 64px;
+
+    /*
+     * Derived values: don't edit these, they follow the four above. On phones every use takes the
+     * base value; from 768 px up they keep the original desktop proportions.
+     */
+    --space-section-case: var(--space-section);
+    --space-hero-top-case: var(--space-hero-top);
+    --space-hero-bottom-case: var(--space-hero-bottom);
+    --space-block-next: var(--space-block);
+    --space-block-figures: var(--space-block);
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --space-section: 140px;
+      --space-hero-top: 120px;
+      --space-hero-bottom: 96px;
+      --space-block: 96px;
+
+      /* Case study sections are 6/7 of the homepage gap (120 px when --space-section is 140 px). */
+      --space-section-case: calc(var(--space-section) * 6 / 7);
+      /* The case study hero is shorter: 7/15 of the top (56 px) and half of the bottom (48 px). */
+      --space-hero-top-case: calc(var(--space-hero-top) * 7 / 15);
+      --space-hero-bottom-case: calc(var(--space-hero-bottom) / 2);
+      /* Next project card: 35/24 of the block gap (140 px); case study figures: 2/3 (64 px). */
+      --space-block-next: calc(var(--space-block) * 35 / 24);
+      --space-block-figures: calc(var(--space-block) * 2 / 3);
+    }
+  }
+
   * {
     @apply border-border;
   }

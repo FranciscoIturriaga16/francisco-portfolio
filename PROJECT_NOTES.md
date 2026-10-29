@@ -6,6 +6,7 @@ Francisco Iturriaga's personal portfolio: a homepage (hero, projects, about, exp
 Stack: Astro 7 (static output, Vite 8 underneath), TypeScript (Astro strict preset), Tailwind CSS 3 through PostCSS, @lucide/astro icons, self hosted Geist and Geist Mono via @fontsource. Every page is generated HTML; the only client JavaScript is the mobile menu and the project filter. No backend or database. Public repo: https://github.com/FranciscoIturriaga16/francisco-portfolio (branch `main`). Deploys to Vercel from `main`; site URL https://franciscoiturriaga.com.
 
 ## Current status
+- 2026-10-29: section spacing moved into CSS variables and tightened on phones. At 768, 1024 and 1440 px every page is pixel identical to before; phone pages are 280 to 560 px shorter. Anchor links, build, check and lint verified.
 - 2026-10-29: migrated from the React SPA to Astro, merged to `main` and pushed (commit `ff1c5da`). Whether the Vercel deploy succeeded has not been checked. `npm run build`, `npm run check` and `npm run lint` pass. The `astro-migration` branch is merged and only exists locally.
 - Tested with Playwright at 320, 375, 390, 414, 768, 1024, 1440 and 844x390: no horizontal scroll and no console errors on any page. Desktop and tablet pages have the same heights as before the migration. Menu, filter, Next project cycle, 404 and `/resume.pdf` all tested.
 - `public/resume.pdf` is current (it includes HAVEN and The-Versus).
@@ -13,6 +14,7 @@ Stack: Astro 7 (static output, Vite 8 underneath), TypeScript (Astro strict pres
 - The Vercel project may still be set to the Vite preset; it should use the Astro preset with output `dist`.
 
 ## Recent changes
+- 2026-10-29: Section spacing variables in `src/index.css` (`--space-section`, `--space-hero-top`, `--space-hero-bottom`, `--space-block`); phones use 64/48/48/64 px. README has a "Tuning spacing" section.
 - 2026-10-29: Astro migration. React, React Router, Vite config, `vercel.json` and `components.json` removed. Added a hamburger menu below 768 px, per page meta tags (canonical, Open Graph, Twitter), generated OG images per case study (`/og/<id>.png`), sitemap, styled 404 page, WebP images via `astro:assets`, safe area insets and 44 px tap targets on phones.
 - 2026-10-29: Replaced the old favicon with the FI monogram and added `public/og-image.png`; new bio, skills, experience; rewrote the HAVEN and The-Versus case studies.
 - 2026-10-13: Redesign: Geist fonts, dark palette as CSS variables, typed content layer in `src/content/`, homepage and reusable case study template.
@@ -29,6 +31,7 @@ Stack: Astro 7 (static output, Vite 8 underneath), TypeScript (Astro strict pres
 - Content images are imported (`ImageMetadata`) and rendered with `<Image>`, which outputs WebP with `widths` and `sizes`. Hero and featured card images load eagerly; the rest are lazy. Frames are set per image: `phone`, `screen` or `plain`.
 - The mobile menu panel is a sibling of `<header>` (the header's backdrop blur would trap a fixed child); `menu.ts` places it under the header, traps focus, locks scroll, closes on Escape, link taps and when the window grows past 768 px.
 - No JavaScript fallback: `<html class="no-js">` is swapped to `js` by an inline script. With `no-js` the header shows its links in two rows, the menu button and filter are hidden, and all projects show. Use the `[.no-js_&]:` variant for this.
+- Big vertical gaps (between sections, hero top and bottom, above Next project, the footer and case study figures) use the `--space-*` variables in `src/index.css` through arbitrary values like `pt-[var(--space-section)]`. Edit only the four base variables; the `-case`, `-next` and `-figures` ones are derived (equal to the base on phones, original proportions from 768 px up). Spacing inside cards and between small elements stays as Tailwind classes.
 - `[hidden]` always wins over display utilities (`src/index.css`); the filter and the menu rely on it.
 - Smooth scrolling is CSS (`scroll-behavior`, off for reduced motion) and sections use `scroll-margin-top` to clear the sticky header.
 - The same nav is used on every page. The footer note "Thanks for stopping by" appears only on the homepage.

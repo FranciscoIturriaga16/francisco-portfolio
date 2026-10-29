@@ -32,7 +32,7 @@ const headingId = `${id}-title`;
 const cycle = section.cycle?.slice(0, cycleLayout.length);
 ---
 
-<section id={id} aria-labelledby={headingId} class="flex flex-wrap gap-x-16 gap-y-6 pt-[120px]">
+<section id={id} aria-labelledby={headingId} class="flex flex-wrap gap-x-16 gap-y-6 pt-[var(--space-section-case)]">
   <div class="shrink grow basis-[220px]">
     <p class="font-mono text-[13px] text-accent">{number}</p>
     <h2 id={headingId} class="mt-2 text-[32px] font-semibold leading-[1.15] tracking-[-0.02em]">
