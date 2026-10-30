@@ -1,17 +1,17 @@
 # Project notes
-_Last updated: 2026-10-29_
+_Last updated: 2026-10-30_
 
 ## What this project is
 Francisco Iturriaga's personal portfolio: a homepage (hero, projects, about, experience, contact) and one case study page per project.
 Stack: Astro 7 (static output, Vite 8 underneath), TypeScript (Astro strict preset), Tailwind CSS 3 through PostCSS, @lucide/astro icons, self hosted Geist and Geist Mono via @fontsource. Every page is generated HTML; the only client JavaScript is the mobile menu and the project filter. No backend or database. Public repo: https://github.com/FranciscoIturriaga16/francisco-portfolio (branch `main`). Deploys to Vercel from `main`; site URL https://franciscoiturriaga.com.
 
 ## Current status
-- 2026-10-29: redesigned images for The-Versus, HAYDN, Better School Choice and Build Early Money Habits are in, and the last three case studies were rewritten. Checked with Playwright at 375, 768 and 1440 px: no horizontal scroll, no console errors, images sharp at 2x. Case study pages ship about 85 to 125 KB of images on phones and 85 to 240 KB on desktop (1x to 2x).
-- 2026-10-29: section spacing moved into CSS variables and tightened on phones. At 768, 1024 and 1440 px every page is pixel identical to before; phone pages are 280 to 560 px shorter. Anchor links, build, check and lint verified. Comparison screenshots were temporary and not kept.
-- 2026-10-29: migrated from the React SPA to Astro and pushed to `main`. Latest push is the project images and case study rewrite (`fe44579` plus notes); whether the Vercel deploys succeeded has not been checked. `npm run build`, `npm run check` and `npm run lint` pass. The `astro-migration` branch is merged and only exists locally.
-- Tested with Playwright at 320, 375, 390, 414, 768, 1024, 1440 and 844x390: no horizontal scroll and no console errors on any page. Desktop and tablet pages have the same heights as before the migration. Menu, filter, Next project cycle, 404 and `/resume.pdf` all tested.
+- Everything is committed and pushed to `main` (latest `62c1105`). Whether the Vercel deploys succeeded has not been checked. `npm run build`, `npm run check` and `npm run lint` pass.
+- All five projects have their final images and case studies. Redesigned images for The-Versus, HAYDN, Better School Choice and Build Early Money Habits are in; HAVEN keeps its own. Checked with Playwright at 375, 768 and 1440 px: no horizontal scroll, no console errors, images sharp at 2x. Case study pages ship about 85 to 125 KB of images on phones and 85 to 240 KB on desktop.
+- Earlier Playwright passes (320 to 1440 px and 844x390) covered the menu, filter, Next project cycle, 404 and `/resume.pdf`.
 - `public/resume.pdf` is current (it includes HAVEN and The-Versus).
 - The Vercel project may still be set to the Vite preset; it should use the Astro preset with output `dist`.
+- The `astro-migration` branch is merged and only exists locally.
 
 ## Recent changes
 - 2026-10-29: New project images (`cover-*`, `versus-*`, `haydn-*`, `bsc-*`, `bemh-*` in `src/assets/`); old images for those four projects deleted. Case study model gained labeled stats (`{ value, label }`), `statements` (quote card list, used for job stories) and a page `note`. Figures now show screens and phones whole instead of cropping (this also changed HAVEN's two screen figures). Cards for the three UX projects are tagged "Flatiron School".
@@ -47,6 +47,7 @@ Stack: Astro 7 (static output, Vite 8 underneath), TypeScript (Astro strict pres
 
 ## Next steps
 - [ ] In Vercel, set Framework Preset to Astro (build `npm run build`, output `dist`) if it is not already, then check the live site: favicon, link previews, menu on a real phone.
+- [ ] On the live site, look over the HAVEN case study figures (no longer cropped) and the single phone figures (HAYDN app home and log in) in their wide boxes.
 - [ ] Add the GitHub URL in `src/content/site.ts` (`githubUrl`, marked TODO).
 - [ ] Optionally add an About photo in `src/content/site.ts` (`photo`).
 - [ ] Point the franciscoiturriaga.com domain at Vercel if it is not yet; canonical and OG URLs already use it.
@@ -61,4 +62,5 @@ Stack: Astro 7 (static output, Vite 8 underneath), TypeScript (Astro strict pres
 - Smooth scrolling makes Playwright full page screenshots catch the sticky header mid scroll; wait for scrolling to settle in tests.
 - Tailwind classes are built from strings in `src/components/common/styles.ts`; keep full class names there so Tailwind can detect them.
 - `pdftotext` comes from Homebrew `poppler`; use it to check what `public/resume.pdf` says.
-- For layout checks, run `npm run build && npm run preview` and test with Playwright at 375, 768 and 1440 px. Don't run `playwright install`; Chromium is already cached.
+- For layout checks, run `npm run build && npm run preview` and test with Playwright at 375, 768 and 1440 px. Don't run `playwright install`; Chromium is already cached (revision 1248) but the Playwright library is not a project dependency. Install `playwright-core` with `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1` into a scratch folder and run scripts from there.
+- With `srcset` w descriptors, `img.naturalWidth` is already divided by the device pixel ratio; multiply by the DPR before comparing it with the rendered size in a sharpness check.
