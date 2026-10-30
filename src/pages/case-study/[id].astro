@@ -33,6 +33,7 @@ const pad = (value: number) => String(value).padStart(2, "0");
   <main id="main" class={container}>
     <CaseHero project={project} caseStudy={caseStudy} number={pad(index + 1)} />
     {caseStudy.sections.map((section, position) => <CaseSectionBlock number={pad(position + 1)} section={section} />)}
+    {caseStudy.note && <p class="pt-12 text-sm text-label">{caseStudy.note}</p>}
     <NextProject project={nextProject} />
   </main>
 </BaseLayout>

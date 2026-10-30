@@ -2,6 +2,7 @@
 import { ArrowLeft, ArrowUpRight } from "@lucide/astro";
 import Eyebrow from "@/components/common/Eyebrow.astro";
 import Tag from "@/components/common/Tag.astro";
+import { Image } from "astro:assets";
 import DeviceFrame from "@/components/common/DeviceFrame.astro";
 import { pillButton } from "@/components/common/styles";
 import { statusDots, type Project } from "@/content/projects";
@@ -25,6 +26,8 @@ const phoneSizes = [
 const { project, caseStudy, number } = Astro.props;
 const images = project.caseStudyImages;
 const phones = images.filter((image) => image.frame === "phone");
+// A cover image already has its own background and device mockups, so it fills the hero box.
+const cover = images[0]?.frame === "plain" ? images[0] : undefined;
 
 const meta = [
   { label: "Role", value: project.role },
@@ -79,30 +82,44 @@ const meta = [
   </dl>
 </section>
 
-<figure class="flex items-end justify-center gap-4 rounded-3xl border border-border bg-surface px-6 py-12 sm:gap-8">
-  {
-    phones.length > 0
-      ? phones
-          .slice(0, 3)
-          .map((image, index) => (
-            <DeviceFrame
-              image={image}
-              eager
-              widths={[240, 480]}
-              sizes="240px"
-              class={cn("min-w-0 flex-1", phoneSizes[index], index === 1 && "rounded-[34px]")}
-            />
-          ))
-      : images
-          .slice(0, 1)
-          .map((image) => (
-            <DeviceFrame
-              image={image}
-              eager
-              widths={[480, 880, 1320, 1760]}
-              sizes="(min-width: 1120px) 880px, calc(100vw - 98px)"
-              class="w-full max-w-[880px]"
-            />
-          ))
-  }
-</figure>
+{
+  cover ? (
+    <figure class="overflow-hidden rounded-3xl border border-border bg-surface">
+      <Image
+        src={cover.src}
+        alt={cover.alt}
+        widths={[640, 1072, 1600, 2144]}
+        sizes="(min-width: 1120px) 1072px, calc(100vw - 48px)"
+        loading="eager"
+        decoding="async"
+        class="block h-auto w-full"
+      />
+    </figure>
+  ) : (
+    <figure class="flex items-end justify-center gap-4 rounded-3xl border border-border bg-surface px-6 py-12 sm:gap-8">
+      {phones.length > 0
+        ? phones
+            .slice(0, 3)
+            .map((image, index) => (
+              <DeviceFrame
+                image={image}
+                eager
+                widths={[240, 480]}
+                sizes="240px"
+                class={cn("min-w-0 flex-1", phoneSizes[index], index === 1 && "rounded-[34px]")}
+              />
+            ))
+        : images
+            .slice(0, 1)
+            .map((image) => (
+              <DeviceFrame
+                image={image}
+                eager
+                widths={[480, 880, 1320, 1760]}
+                sizes="(min-width: 1120px) 880px, calc(100vw - 98px)"
+                class="w-full max-w-[880px]"
+              />
+            ))}
+    </figure>
+  )
+}

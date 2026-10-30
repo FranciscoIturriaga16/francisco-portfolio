@@ -49,6 +49,12 @@ export interface Flow {
   steps: FlowStep[];
 }
 
+/** A short figure shown as a large number, with an optional label below it. */
+export interface Stat {
+  value: string;
+  label?: string;
+}
+
 export interface Comparison {
   title: string;
   columns: [string, string, string];
@@ -84,7 +90,9 @@ export interface CaseSection {
   /** Four steps of a loop, drawn clockwise with the last step leading back to the first. */
   cycle?: string[];
   /** Short figures shown as large numbers. */
-  stats?: string[];
+  stats?: Stat[];
+  /** Short quoted statements (job stories, user quotes without attribution), shown as a list of quote cards. */
+  statements?: string[];
   comparison?: Comparison;
   featureGroups?: FeatureGroup[];
   /** Closing paragraph, after lists and cards. */
@@ -102,6 +110,8 @@ export interface CaseStudy {
   stack?: string;
   /** Rendered in this order and numbered from 01. */
   sections: CaseSection[];
+  /** Small muted note after the last section, for example where the screens come from. */
+  note?: string;
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -338,7 +348,7 @@ export const caseStudies: CaseStudy[] = [
       {
         id: "results",
         title: "Results",
-        stats: ["About 100 comparisons", "5 articles", "About six weeks"],
+        stats: [{ value: "About 100 comparisons" }, { value: "5 articles" }, { value: "About six weeks" }],
       },
       {
         id: "paused",

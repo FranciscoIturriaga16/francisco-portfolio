@@ -2,15 +2,17 @@
 import DeviceFrame from "@/components/common/DeviceFrame.astro";
 import type { Figure } from "@/content/caseStudies";
 
+/** Screens and phones are shown whole: the frame takes the screenshot's aspect ratio instead of cropping it. */
 const frameSize = {
-  phone: "h-[360px] w-[240px] max-w-full rounded-[28px]",
-  screen: "max-h-[360px] w-full",
-  plain: "h-full w-full",
+  phone: "w-[220px] max-w-full aspect-[390/844] rounded-[28px]",
+  screen: "w-full",
+  plain: "w-full",
 };
 
 /** Captioned screenshots shown below a section. Always below the fold, so images load lazily. */
 const { figures } = Astro.props as { figures: Figure[] };
 
+// Each figure spans two rows of a subgrid, so boxes and captions in the same row line up.
 // One figure spans the full width; two or more share a row on wide screens.
 const sizes =
   figures.length === 1
@@ -21,16 +23,16 @@ const sizes =
 <div class="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-6 pt-[var(--space-block-figures)]">
   {
     figures.map((figure) => (
-      <figure>
-        <div class="flex h-[420px] items-center justify-center overflow-hidden rounded-[20px] border border-border bg-surface p-6">
+      <figure class="row-span-2 grid grid-rows-subgrid gap-3">
+        <div class="flex min-h-[420px] items-center justify-center overflow-hidden rounded-[20px] border border-border bg-surface p-6 max-sm:min-h-0 max-sm:p-4">
           <DeviceFrame
             image={figure.image}
-            widths={figure.image.frame === "phone" ? [240, 480] : [480, 800, 1200]}
-            sizes={figure.image.frame === "phone" ? "240px" : sizes}
+            widths={figure.image.frame === "phone" ? [220, 440] : [480, 800, 1200, 2048]}
+            sizes={figure.image.frame === "phone" ? "220px" : sizes}
             class={frameSize[figure.image.frame]}
           />
         </div>
-        <figcaption class="mt-3 text-[15px] text-label">
+        <figcaption class="text-[15px] text-label">
           <span class="font-medium text-foreground">{figure.captionTitle}</span> {figure.caption}
         </figcaption>
       </figure>

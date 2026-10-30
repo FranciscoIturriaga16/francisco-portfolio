@@ -6,6 +6,7 @@ import ExternalProjectLink from "@/components/common/ExternalProjectLink.astro";
 import { cn } from "@/lib/utils";
 import ProjectTags from "./ProjectTags.astro";
 
+// A cover keeps its 4:3 shape so its device mockups are not cropped; screenshots fill a fixed height.
 const { project } = Astro.props as { project: Project };
 ---
 
@@ -15,7 +16,7 @@ const { project } = Astro.props as { project: Project };
     "group relative flex w-full flex-col overflow-hidden rounded-[20px] text-foreground transition-colors focus-within:border-border-strong hover:border-border-strong",
   )}
 >
-  <div class="h-60 overflow-hidden bg-raised">
+  <div class={cn("overflow-hidden bg-raised", project.cardImage.frame === "plain" ? "aspect-[4/3]" : "h-60")}>
     <Image
       src={project.cardImage.src}
       alt={project.cardImage.alt}

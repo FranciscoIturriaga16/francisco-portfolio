@@ -1,5 +1,5 @@
 ---
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, Repeat } from "@lucide/astro";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, Quote, Repeat } from "@lucide/astro";
 import Eyebrow from "@/components/common/Eyebrow.astro";
 import type { CaseSection } from "@/content/caseStudies";
 import { cn } from "@/lib/utils";
@@ -124,8 +124,24 @@ const cycle = section.cycle?.slice(0, cycleLayout.length);
       section.stats && (
         <ul class="mt-8 grid gap-4 sm:grid-cols-3">
           {section.stats.map((stat) => (
-            <li class="rounded-2xl border border-border bg-surface p-6 text-[clamp(22px,2.4vw,28px)] font-semibold leading-[1.2] tracking-[-0.02em]">
-              {stat}
+            <li class="rounded-2xl border border-border bg-surface p-6">
+              <p class="text-[clamp(22px,2.4vw,28px)] font-semibold leading-[1.2] tracking-[-0.02em]">{stat.value}</p>
+              {stat.label && <p class="mt-1.5 text-base text-muted">{stat.label}</p>}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      section.statements && (
+        <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+          {section.statements.map((statement) => (
+            <li class="rounded-2xl border border-border bg-surface p-6">
+              <blockquote>
+                <Quote aria-hidden="true" class="size-5 text-accent" stroke-width={2.2} />
+                <p class="mt-3 text-[17px] leading-[1.55]">{statement}</p>
+              </blockquote>
             </li>
           ))}
         </ul>
