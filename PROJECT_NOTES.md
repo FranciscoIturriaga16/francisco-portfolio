@@ -6,14 +6,15 @@ Francisco Iturriaga's personal portfolio: a homepage (hero, projects, about, exp
 Stack: Astro 7 (static output, Vite 8 underneath), TypeScript (Astro strict preset), Tailwind CSS 3 through PostCSS, @lucide/astro icons, self hosted Geist and Geist Mono via @fontsource. Every page is generated HTML; the only client JavaScript is the mobile menu and the project filter. No backend or database. Public repo: https://github.com/FranciscoIturriaga16/francisco-portfolio (branch `main`). Deploys to Vercel from `main`; site URL https://franciscoiturriaga.com.
 
 ## Current status
+- 2026-10-29: redesigned images for The-Versus, HAYDN, Better School Choice and Build Early Money Habits are in, and the last three case studies were rewritten. Checked with Playwright at 375, 768 and 1440 px: no horizontal scroll, no console errors, images sharp at 2x. Case study pages ship about 85 to 125 KB of images on phones and 85 to 240 KB on desktop (1x to 2x).
 - 2026-10-29: section spacing moved into CSS variables and tightened on phones. At 768, 1024 and 1440 px every page is pixel identical to before; phone pages are 280 to 560 px shorter. Anchor links, build, check and lint verified. Comparison screenshots were temporary and not kept.
-- 2026-10-29: migrated from the React SPA to Astro and pushed to `main`. Latest push is `77161bf` (spacing variables); whether the Vercel deploys succeeded has not been checked. `npm run build`, `npm run check` and `npm run lint` pass. The `astro-migration` branch is merged and only exists locally.
+- 2026-10-29: migrated from the React SPA to Astro and pushed to `main`. Latest push is the project images and case study rewrite (`fe44579` plus notes); whether the Vercel deploys succeeded has not been checked. `npm run build`, `npm run check` and `npm run lint` pass. The `astro-migration` branch is merged and only exists locally.
 - Tested with Playwright at 320, 375, 390, 414, 768, 1024, 1440 and 844x390: no horizontal scroll and no console errors on any page. Desktop and tablet pages have the same heights as before the migration. Menu, filter, Next project cycle, 404 and `/resume.pdf` all tested.
 - `public/resume.pdf` is current (it includes HAVEN and The-Versus).
-- New project images are planned; the existing ones are still in place.
 - The Vercel project may still be set to the Vite preset; it should use the Astro preset with output `dist`.
 
 ## Recent changes
+- 2026-10-29: New project images (`cover-*`, `versus-*`, `haydn-*`, `bsc-*`, `bemh-*` in `src/assets/`); old images for those four projects deleted. Case study model gained labeled stats (`{ value, label }`), `statements` (quote card list, used for job stories) and a page `note`. Figures now show screens and phones whole instead of cropping (this also changed HAVEN's two screen figures). Cards for the three UX projects are tagged "Flatiron School".
 - 2026-10-29: Section spacing variables in `src/index.css` (`--space-section`, `--space-hero-top`, `--space-hero-bottom`, `--space-block`); phones use 64/48/48/64 px. README has a "Tuning spacing" section.
 - 2026-10-29: Astro migration. React, React Router, Vite config, `vercel.json` and `components.json` removed. Added a hamburger menu below 768 px, per page meta tags (canonical, Open Graph, Twitter), generated OG images per case study (`/og/<id>.png`), sitemap, styled 404 page, WebP images via `astro:assets`, safe area insets and 44 px tap targets on phones.
 - 2026-10-29: Replaced the old favicon with the FI monogram and added `public/og-image.png`; new bio, skills, experience; rewrote the HAVEN and The-Versus case studies.
@@ -29,6 +30,8 @@ Stack: Astro 7 (static output, Vite 8 underneath), TypeScript (Astro strict pres
 - URLs have no trailing slash (`trailingSlash: "never"`). No `vercel.json`: Vercel serves the directory indexes and `404.html` by default.
 - Case study pages come from `getStaticPaths` in `src/pages/case-study/[id].astro`. Each case study has an ordered `sections` list; every section sets its own `id` and `title`, numbering follows the list order, and a section renders only the blocks it has.
 - Content images are imported (`ImageMetadata`) and rendered with `<Image>`, which outputs WebP with `widths` and `sizes`. Hero and featured card images load eagerly; the rest are lazy. Frames are set per image: `phone`, `screen` or `plain`.
+- Project images are exported at 2x: desktop screens 1440 px wide (`screen`), phone screens 390x844 (`phone`), covers 1200x900 with their own device mockups (`plain`). A `plain` first case study image fills the hero box edge to edge, and a `plain` card image keeps its 4:3 shape on the homepage card.
+- Figures size their frame to the screenshot's aspect ratio (phones 220 px wide) and never crop. Each figure is a two row subgrid so boxes and captions line up across a row.
 - The mobile menu panel is a sibling of `<header>` (the header's backdrop blur would trap a fixed child); `menu.ts` places it under the header, traps focus, locks scroll, closes on Escape, link taps and when the window grows past 768 px.
 - No JavaScript fallback: `<html class="no-js">` is swapped to `js` by an inline script. With `no-js` the header shows its links in two rows, the menu button and filter are hidden, and all projects show. Use the `[.no-js_&]:` variant for this.
 - Big vertical gaps (between sections, hero top and bottom, above Next project, the footer and case study figures) use the `--space-*` variables in `src/index.css` through arbitrary values like `pt-[var(--space-section)]`. Edit only the four base variables; the `-case`, `-next` and `-figures` ones are derived (equal to the base on phones, original proportions from 768 px up). Spacing inside cards and between small elements stays as Tailwind classes.
@@ -46,7 +49,6 @@ Stack: Astro 7 (static output, Vite 8 underneath), TypeScript (Astro strict pres
 - [ ] In Vercel, set Framework Preset to Astro (build `npm run build`, output `dist`) if it is not already, then check the live site: favicon, link previews, menu on a real phone.
 - [ ] Add the GitHub URL in `src/content/site.ts` (`githubUrl`, marked TODO).
 - [ ] Optionally add an About photo in `src/content/site.ts` (`photo`).
-- [ ] Add new project images (planned).
 - [ ] Point the franciscoiturriaga.com domain at Vercel if it is not yet; canonical and OG URLs already use it.
 
 ## Gotchas
