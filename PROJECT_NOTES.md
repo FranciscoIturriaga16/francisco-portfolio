@@ -6,14 +6,15 @@ Francisco Iturriaga's personal portfolio: a homepage (hero, projects, about, exp
 Stack: Astro 7 (static output, Vite 8 underneath), TypeScript (Astro strict preset), Tailwind CSS 3 through PostCSS, @lucide/astro icons, self hosted Geist and Geist Mono via @fontsource. Every page is generated HTML; the only client JavaScript is the mobile menu and the project filter. No backend or database. Public repo: https://github.com/FranciscoIturriaga16/francisco-portfolio (branch `main`). Deploys to Vercel from `main`; site URL https://franciscoiturriaga.com.
 
 ## Current status
-- Everything is committed and pushed to `main` (latest `62c1105`). Whether the Vercel deploys succeeded has not been checked. `npm run build`, `npm run check` and `npm run lint` pass.
-- All five projects have their final images and case studies. Redesigned images for The-Versus, HAYDN, Better School Choice and Build Early Money Habits are in; HAVEN keeps its own. Checked with Playwright at 375, 768 and 1440 px: no horizontal scroll, no console errors, images sharp at 2x. Case study pages ship about 85 to 125 KB of images on phones and 85 to 240 KB on desktop.
+- Everything is committed and pushed to `main`. Whether the Vercel deploys succeeded has not been checked. `npm run build`, `npm run check` and `npm run lint` pass.
+- All five projects have their final images and case studies, including the redesigned HAVEN images (2026-10-30). The HAVEN case study page ships about 110 to 140 KB of images. Checked with Playwright at 375, 768 and 1440 px: no horizontal scroll, no console errors, images sharp at 2x. Case study pages ship about 85 to 125 KB of images on phones and 85 to 240 KB on desktop.
 - Earlier Playwright passes (320 to 1440 px and 844x390) covered the menu, filter, Next project cycle, 404 and `/resume.pdf`.
 - `public/resume.pdf` is current (it includes HAVEN and The-Versus).
 - The Vercel project may still be set to the Vite preset; it should use the Astro preset with output `dist`.
 - The `astro-migration` branch is merged and only exists locally.
 
 ## Recent changes
+- 2026-10-30: HAVEN refresh. New images (`cover-haven`, `haven-site`, `haven-admin`, `haven-app-*` in `src/assets/`); `haven-project.png` and all `haven-folio-*.png` deleted. Case study gained "Design" and "Business model" sections, an "Email" engineering point, figures under "Key features", a new "Where it stands" and a page note. The featured homepage card now shows `cardImage` edge to edge (4:3) when its frame is `plain`, and falls back to the phone pair otherwise.
 - 2026-10-29: New project images (`cover-*`, `versus-*`, `haydn-*`, `bsc-*`, `bemh-*` in `src/assets/`); old images for those four projects deleted. Case study model gained labeled stats (`{ value, label }`), `statements` (quote card list, used for job stories) and a page `note`. Figures now show screens and phones whole instead of cropping (this also changed HAVEN's two screen figures). Cards for the three UX projects are tagged "Flatiron School".
 - 2026-10-29: Section spacing variables in `src/index.css` (`--space-section`, `--space-hero-top`, `--space-hero-bottom`, `--space-block`); phones use 64/48/48/64 px. README has a "Tuning spacing" section.
 - 2026-10-29: Astro migration. React, React Router, Vite config, `vercel.json` and `components.json` removed. Added a hamburger menu below 768 px, per page meta tags (canonical, Open Graph, Twitter), generated OG images per case study (`/og/<id>.png`), sitemap, styled 404 page, WebP images via `astro:assets`, safe area insets and 44 px tap targets on phones.
@@ -43,11 +44,10 @@ Stack: Astro 7 (static output, Vite 8 underneath), TypeScript (Astro strict pres
 - Projects can have `tags`, a `status` ("In development" or "Paused") and an external `link`. Cards use a stretched title link (`stretchedLink` in `styles.ts`) so they can contain a second link.
 - The hero Stack line comes from `caseStudy.stack` when set, otherwise from the card's `stack`.
 - Icons are rendered from `public/favicon.svg` with headless Chrome. Keep `Monogram.astro` and the OG image route in sync with that file if the mark changes.
-- `src/assets/haven-folio-2.png` is unused but kept.
 
 ## Next steps
 - [ ] In Vercel, set Framework Preset to Astro (build `npm run build`, output `dist`) if it is not already, then check the live site: favicon, link previews, menu on a real phone.
-- [ ] On the live site, look over the HAVEN case study figures (no longer cropped) and the single phone figures (HAYDN app home and log in) in their wide boxes.
+- [ ] On the live site, look over the new HAVEN images and the single phone figures (HAYDN app home and log in) in their wide boxes.
 - [ ] Add the GitHub URL in `src/content/site.ts` (`githubUrl`, marked TODO).
 - [ ] Optionally add an About photo in `src/content/site.ts` (`photo`).
 - [ ] Point the franciscoiturriaga.com domain at Vercel if it is not yet; canonical and OG URLs already use it.

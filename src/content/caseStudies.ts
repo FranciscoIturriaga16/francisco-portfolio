@@ -1,5 +1,8 @@
-import havenDashboard from "@/assets/haven-folio-1.png";
-import havenBooking from "@/assets/haven-folio-3.png";
+import havenSite from "@/assets/haven-site.png";
+import havenAdmin from "@/assets/haven-admin.png";
+import havenAppBookings from "@/assets/haven-app-bookings.png";
+import havenAppPayments from "@/assets/haven-app-payments.png";
+import havenAppGuests from "@/assets/haven-app-guests.png";
 import versusVote from "@/assets/versus-vote.png";
 import versusAgent from "@/assets/versus-agent.png";
 import versusSquad from "@/assets/versus-squad.png";
@@ -215,14 +218,18 @@ export const caseStudies: CaseStudy[] = [
         lead: "HAVEN is four products that share one TypeScript core: a member app for iOS and Android, an admin dashboard for running the community, a marketing site with public community pages, and secure payment pages.",
         figures: [
           {
-            image: { src: havenDashboard, alt: "HAVEN admin dashboard with links to manage experiences, members, insights and payments", frame: "screen" },
-            captionTitle: "Admin dashboard.",
-            caption: "Experiences, members, insights and payments in one view.",
+            image: { src: havenSite, alt: "HAVEN marketing site at havencommunity.app", frame: "screen" },
+            captionTitle: "Marketing site.",
+            caption: "Live at havencommunity.app, with pricing, fees and how payments work.",
           },
           {
-            image: { src: havenBooking, alt: "HAVEN Book Now screen listing facilities and upcoming events", frame: "screen" },
-            captionTitle: "Booking.",
-            caption: "Facilities and upcoming events, ready to book.",
+            image: {
+              src: havenAdmin,
+              alt: "HAVEN admin dashboard with items that need attention, today's bookings and monthly totals",
+              frame: "screen",
+            },
+            captionTitle: "Admin dashboard.",
+            caption: "What needs attention, today's bookings and the month at a glance.",
           },
         ],
       },
@@ -252,6 +259,31 @@ export const caseStudies: CaseStudy[] = [
             text: "Scheduled announcements for the whole community or one household, plus bylaws, rules and forms in one place.",
           },
         ],
+        figures: [
+          {
+            image: { src: havenAppBookings, alt: "HAVEN Bookings screen with the next booking on top and a list of spaces to book", frame: "phone" },
+            captionTitle: "Bookings.",
+            caption: "Book a space, with the next booking always on top.",
+          },
+          {
+            image: { src: havenAppPayments, alt: "HAVEN Payments screen with the household balance due, a pay button, bills and recent payments", frame: "phone" },
+            captionTitle: "Payments.",
+            caption: "Dues and bills for the household, paid in one tap.",
+          },
+          {
+            image: { src: havenAppGuests, alt: "HAVEN Guest passes screen with passes left, an invite button and the member's upcoming and used passes", frame: "phone" },
+            captionTitle: "Guest passes.",
+            caption: "Invite guests and track passes left this month.",
+          },
+        ],
+      },
+      {
+        id: "design",
+        title: "Design",
+        lead: "Calm, consistent, and built around each community.",
+        body: [
+          "The member app works in light and dark mode and uses the same components on every page. Each community's own color and banner photo shape its pages, while buttons and controls keep HAVEN's green, so the app always feels familiar. The admin dashboard opens on what needs attention instead of a wall of menus.",
+        ],
       },
       {
         id: "engineering",
@@ -269,15 +301,30 @@ export const caseStudies: CaseStudy[] = [
             term: "Quality",
             text: "Automated tests across the database, server functions, admin dashboard and mobile app.",
           },
+          {
+            term: "Email",
+            text: "Emails sent through Resend in each community's colors, including guest passes with a QR code that works in Gmail on the web and on phones.",
+          },
+        ],
+      },
+      {
+        id: "business-model",
+        title: "Business model",
+        lead: "Priced by households, not headcount.",
+        body: [
+          "Plans run from $29 to $299 a month based on the number of households, with a free tier for setting up. Online payments are optional. When a community uses them, Stripe's cost passes through at cost and HAVEN adds a small service fee: 1% on dues and 2% on bookings, guest passes and tickets, each with a minimum and a cap, all itemized before anyone pays.",
         ],
       },
       {
         id: "status",
         title: "Where it stands",
         lead: "HAVEN is in active development and preparing to launch with its first communities.",
-        body: ["The marketing site is live at havencommunity.app."],
+        body: [
+          "The marketing site, admin dashboard and payment pages are live on havencommunity.app, and the mobile app is in testing on iOS and Android.",
+        ],
       },
     ],
+    note: "App and admin screens shown with sample data.",
   },
   {
     projectId: "the-versus",

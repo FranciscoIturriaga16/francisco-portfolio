@@ -1,7 +1,7 @@
-import havenCard from "@/assets/haven-project.png";
-import havenMyCommunities from "@/assets/haven-folio-6.png";
-import havenEvents from "@/assets/haven-folio-5.png";
-import havenUsage from "@/assets/haven-folio-4.png";
+import havenCover from "@/assets/cover-haven.png";
+import havenAppHome from "@/assets/haven-app-home.png";
+import havenAppActivity from "@/assets/haven-app-activity.png";
+import havenAppBookings from "@/assets/haven-app-bookings.png";
 import theVersusCover from "@/assets/cover-versus.png";
 import betterSchoolChoiceCover from "@/assets/cover-bsc.png";
 import earlyMoneyHabitsCover from "@/assets/cover-bemh.png";
@@ -61,6 +61,8 @@ export const statusDots: Record<ProjectStatus, "amber" | "muted"> = {
   Paused: "muted",
 };
 
+const havenCoverAlt =
+  "HAVEN admin dashboard on a laptop with items that need attention and today's bookings, next to the member app home for the same community";
 const versusCoverAlt =
   "The-Versus on a laptop, showing a Messi versus Cristiano matchup voted factor by factor, next to a phone chat where the agent proposes new matchups";
 const haydnCoverAlt =
@@ -82,11 +84,11 @@ export const projects: Project[] = [
     role: "Founder, product design and development",
     featured: true,
     link: { url: "https://havencommunity.app", label: "havencommunity.app" },
-    cardImage: { src: havenCard, alt: "HAVEN home screen with quick actions for booking, guests and events", frame: "screen" },
+    cardImage: { src: havenCover, alt: havenCoverAlt, frame: "plain" },
     caseStudyImages: [
-      { src: havenMyCommunities, alt: "HAVEN My Communities screen listing the communities a member belongs to", frame: "phone" },
-      { src: havenEvents, alt: "HAVEN Community Events screen", frame: "phone" },
-      { src: havenUsage, alt: "HAVEN Usage Trends screen with community activity charts", frame: "phone" },
+      { src: havenAppHome, alt: "HAVEN member app home with the community card and shortcuts for bookings, guests, events and announcements", frame: "phone" },
+      { src: havenAppActivity, alt: "HAVEN Activity screen with a week calendar and the day's bookings, guests and events across communities", frame: "phone" },
+      { src: havenAppBookings, alt: "HAVEN Bookings screen with the next booking on top and spaces to book", frame: "phone" },
     ],
   },
   {
