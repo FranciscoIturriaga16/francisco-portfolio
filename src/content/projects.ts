@@ -2,10 +2,10 @@ import havenCard from "@/assets/haven-project.png";
 import havenMyCommunities from "@/assets/haven-folio-6.png";
 import havenEvents from "@/assets/haven-folio-5.png";
 import havenUsage from "@/assets/haven-folio-4.png";
-import theVersusCard from "@/assets/the-versus-project.png";
-import betterSchoolChoiceCard from "@/assets/better-school-choice-laptop.png";
-import earlyMoneyHabitsCard from "@/assets/build-early-money-habits.png";
-import haydnCard from "@/assets/haydn-project.png";
+import theVersusCover from "@/assets/cover-versus.png";
+import betterSchoolChoiceCover from "@/assets/cover-bsc.png";
+import earlyMoneyHabitsCover from "@/assets/cover-bemh.png";
+import haydnCover from "@/assets/cover-haydn.png";
 
 export type ProjectCategory = "development" | "ux";
 
@@ -61,6 +61,15 @@ export const statusDots: Record<ProjectStatus, "amber" | "muted"> = {
   Paused: "muted",
 };
 
+const versusCoverAlt =
+  "The-Versus on a laptop, showing a Messi versus Cristiano matchup voted factor by factor, next to a phone chat where the agent proposes new matchups";
+const haydnCoverAlt =
+  "HAYDN landing page with a live editor preview on a laptop, next to the HAYDN Android app home with recent documents and their scores";
+const bscCoverAlt =
+  "Better School Choice search results with filters on a laptop, next to a phone showing an application checklist and deadlines";
+const bemhCoverAlt =
+  "Build Early Money Habits landing page with a lemonade stand illustration on a laptop, next to a phone showing step two of registration";
+
 /** Display order on the homepage and in the case study "Next project" cycle. */
 export const projects: Project[] = [
   {
@@ -83,36 +92,35 @@ export const projects: Project[] = [
   {
     id: "better-school-choice",
     title: "Better School Choice",
-    summary: "Find the perfect school for your children.",
+    summary: "Helping parents find, compare and apply to schools in one place.",
     category: "ux",
-    stack: ["UX research", "Figma"],
+    tags: ["Flatiron School"],
+    stack: ["UX research", "Usability testing", "Figma"],
     role: "UX research and UX/UI design",
-    cardImage: { src: betterSchoolChoiceCard, alt: "Better School Choice homepage with school search and saved favorites", frame: "screen" },
-    caseStudyImages: [
-      { src: betterSchoolChoiceCard, alt: "Better School Choice homepage with school search and saved favorites", frame: "screen" },
-    ],
+    cardImage: { src: betterSchoolChoiceCover, alt: bscCoverAlt, frame: "plain" },
+    caseStudyImages: [{ src: betterSchoolChoiceCover, alt: bscCoverAlt, frame: "plain" }],
   },
   {
     id: "early-money-habits",
     title: "Build Early Money Habits",
-    summary: "Financial education for children.",
+    summary: "A live money course for kids ages 10 to 12, and the site parents use to sign up.",
     category: "ux",
-    stack: ["Figma", "Wireframing"],
+    tags: ["Flatiron School"],
+    stack: ["Figma", "Wireframing", "Visual design"],
     role: "End to end product design",
-    cardImage: { src: earlyMoneyHabitsCard, alt: "Build Early Money Habits landing page inviting parents to register", frame: "screen" },
-    caseStudyImages: [
-      { src: earlyMoneyHabitsCard, alt: "Build Early Money Habits landing page inviting parents to register", frame: "screen" },
-    ],
+    cardImage: { src: earlyMoneyHabitsCover, alt: bemhCoverAlt, frame: "plain" },
+    caseStudyImages: [{ src: earlyMoneyHabitsCover, alt: bemhCoverAlt, frame: "plain" }],
   },
   {
     id: "haydn",
     title: "HAYDN",
-    summary: "Be a better writer than yourself.",
+    summary: "An AI writing assistant for Android and the web.",
     category: "ux",
-    stack: ["Android", "Web", "Figma"],
+    tags: ["Flatiron School"],
+    stack: ["Android", "Responsive web", "Figma"],
     role: "UX/UI design and prototyping",
-    cardImage: { src: haydnCard, alt: "HAYDN marketing website landing page", frame: "screen" },
-    caseStudyImages: [{ src: haydnCard, alt: "HAYDN marketing website landing page", frame: "screen" }],
+    cardImage: { src: haydnCover, alt: haydnCoverAlt, frame: "plain" },
+    caseStudyImages: [{ src: haydnCover, alt: haydnCoverAlt, frame: "plain" }],
   },
   {
     id: "the-versus",
@@ -123,10 +131,8 @@ export const projects: Project[] = [
     status: "Paused",
     stack: ["React", "TypeScript", "Supabase", "Stripe", "OpenClaw"],
     role: "Founder, product design and development",
-    cardImage: { src: theVersusCard, alt: "The-Versus home page with three football matchups and their vote results", frame: "screen" },
-    caseStudyImages: [
-      { src: theVersusCard, alt: "The-Versus home page with three football matchups and their vote results", frame: "screen" },
-    ],
+    cardImage: { src: theVersusCover, alt: versusCoverAlt, frame: "plain" },
+    caseStudyImages: [{ src: theVersusCover, alt: versusCoverAlt, frame: "plain" }],
   },
 ];
 

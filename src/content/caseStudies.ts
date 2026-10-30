@@ -1,8 +1,18 @@
 import havenDashboard from "@/assets/haven-folio-1.png";
 import havenBooking from "@/assets/haven-folio-3.png";
-import bscWireframes from "@/assets/better-school-choice-wireframes.png";
-import bscMobile from "@/assets/better-school-choice-mobile.png";
-import bscMockup from "@/assets/better-school-choice-mockup.png";
+import versusVote from "@/assets/versus-vote.png";
+import versusAgent from "@/assets/versus-agent.png";
+import versusSquad from "@/assets/versus-squad.png";
+import versusBundle from "@/assets/versus-bundle.png";
+import haydnLanding from "@/assets/haydn-landing.png";
+import haydnDocs from "@/assets/haydn-docs.png";
+import haydnLogin from "@/assets/haydn-login.png";
+import bscSearch from "@/assets/bsc-search.png";
+import bscCompare from "@/assets/bsc-compare.png";
+import bscApply from "@/assets/bsc-apply.png";
+import bemhLanding from "@/assets/bemh-landing.png";
+import bemhTopics from "@/assets/bemh-topics.png";
+import bemhRegister from "@/assets/bemh-register.png";
 import type { ProjectImage } from "./projects";
 
 export interface Quote {
@@ -279,6 +289,17 @@ export const caseStudies: CaseStudy[] = [
         id: "idea",
         title: "The idea",
         lead: "Football fans never stop arguing about who was better. The-Versus turned those debates into head to head comparisons that fans vote on, broken down into the factors that matter.",
+        figures: [
+          {
+            image: {
+              src: versusVote,
+              alt: "The-Versus matchup page: Messi versus Cristiano, with a weighted vote for each factor such as peak level, trophies and longevity",
+              frame: "screen",
+            },
+            captionTitle: "Voting.",
+            caption: "Each matchup is split into weighted factors, and fans vote on each one.",
+          },
+        ],
       },
       {
         id: "agent",
@@ -309,6 +330,17 @@ export const caseStudies: CaseStudy[] = [
             ],
           },
         ],
+        figures: [
+          {
+            image: {
+              src: versusAgent,
+              alt: "Telegram chat with the Versus Agent proposing three matchups, with buttons to approve, edit or skip them",
+              frame: "phone",
+            },
+            captionTitle: "Approval over Telegram.",
+            caption: "The agent proposes, I approve or edit, and only then it publishes.",
+          },
+        ],
       },
       {
         id: "card-game",
@@ -320,6 +352,22 @@ export const caseStudies: CaseStudy[] = [
           {
             title: "Squads and challenges",
             text: "Users built squads from their cards and played challenges like Bingo and Starting XI.",
+          },
+        ],
+        figures: [
+          {
+            image: {
+              src: versusSquad,
+              alt: "My Squad page with a Starting XI on a pitch and a card collection grouped by rarity",
+              frame: "screen",
+            },
+            captionTitle: "Squad and collection.",
+            caption: "Cards in five rarities, used to build a Starting XI.",
+          },
+          {
+            image: { src: versusBundle, alt: "Legends Bundle screen revealing a legendary card, with the odds of each rarity listed below", frame: "phone" },
+            captionTitle: "Bundles.",
+            caption: "Weighted random bundles with the odds shown up front.",
           },
         ],
       },
@@ -356,18 +404,19 @@ export const caseStudies: CaseStudy[] = [
         lead: "I paused The-Versus when I realized the player images raised copyright and licensing issues. Taking it offline was the right call until it can use licensed or original artwork.",
       },
     ],
+    note: "Screens recreated in 2026 with sample data and without player photos.",
   },
   {
     projectId: "better-school-choice",
-    tagline: "One place for parents to find, compare and apply to schools, with their children involved in the search.",
+    tagline: "One place for parents to find, compare and apply to schools.",
     platform: "Responsive website",
     sections: [
       {
         id: "problem",
         title: "The problem",
-        lead: "Searching for schools has always been a difficult task for parents.",
+        lead: "Choosing a school is one of the biggest decisions parents make, and the information is scattered everywhere.",
         body: [
-          "It is hard to find all the necessary information and resources without the search becoming extremely time consuming.",
+          "Parents described the search as a part time job: dozens of websites, emails and visits, with nothing keeping track of what they had found.",
         ],
         quote: {
           text: "I couldn't even begin. I sent hundreds of emails, did a dozen visits... it was a part time job!",
@@ -375,133 +424,235 @@ export const caseStudies: CaseStudy[] = [
         },
       },
       {
-        id: "goal",
-        title: "The goal",
-        lead: "Help parents find the perfect school for their children without the process being exhausting.",
+        id: "research",
+        title: "Research",
+        lead: "Six parent interviews and five competitors.",
         body: [
-          "The idea is to give parents all the information and resources within one site, plus a collaborative space where they can keep track of their preferences, findings and progress.",
-        ],
-      },
-      {
-        id: "audience",
-        title: "The audience",
-        body: [
-          "The product was first aimed at parents looking for schools for the first time, since the process can be extremely overwhelming for them.",
-          "Testing with parents who had already been through the process changed that view. They appreciated a tool that simplifies what they had to go through more than anyone, and liked that it gets children involved and lets them collaborate in the search.",
-        ],
-      },
-      {
-        id: "discovery",
-        title: "Discovery",
-        body: [
-          "I studied six interview transcripts from OurKids. What those parents shared led me to create the Better School Choice Grading System, which is how schools are ranked and rated within the site.",
-          "I also reviewed five competitors: Schoolahoop, Step Up for Students, Niche, GreatSchools.org and the City Data website. Studying them confirmed which features were necessary, let me combine ideas from different sites such as the scholarship system, and showed me where there was room to innovate.",
-          "After building a low fidelity prototype, I tested it with parents and got great feedback on both the prototype and the idea itself. It became clear that all parents would appreciate this product and the chance to involve their children in the search.",
+          "I analyzed six interview transcripts from OurKids and reviewed Schoolahoop, Step Up for Students, Niche, GreatSchools and City Data. What parents shared became the Better School Choice grade, a single rating that sums up what they said mattered most: cost, class size, diversity, reputation and graduation results.",
         ],
         figures: [
           {
-            image: { src: bscWireframes, alt: "Better School Choice wireframes and research notes", frame: "plain" },
-            captionTitle: "Wireframes and research.",
-            caption: "Early layouts for the main flows.",
+            image: {
+              src: bscSearch,
+              alt: "Better School Choice search page with filters for grade level, type, cost and class size, and a grade on every school in the results",
+              frame: "screen",
+            },
+            captionTitle: "Search.",
+            caption: "Filters for what parents asked about, with every school's grade visible at a glance.",
           },
+        ],
+      },
+      {
+        id: "job-stories",
+        title: "Job stories",
+        statements: [
+          "When looking for a school for my youngest son, I want to make a list of schools that meet our needs, so I can enroll him and maybe transfer my oldest as well.",
+          "When applying for my kid's school, I want to receive all the necessary information, so I can complete applications correctly despite my inexperience.",
+          "When searching for schools for our kids, I want to save my search progress, so when my husband gets home from work he can see what I have found.",
+          "When choosing a school, I want easy contact with the people who will take care of my son, so I can call them in case of an emergency.",
         ],
       },
       {
         id: "solution",
         title: "The solution",
-        lead: "All the tools in the same site and the same account.",
+        lead: "Find, compare and apply, all in the same account.",
         featureGroups: [
           {
             items: [
-              "Find schools and build a list of favorites",
-              "Apply to, contact and compare schools",
-              "Keep track of information and progress in an organized way",
-              "Sign in on several devices, so parents and children can research at the same time and see what the others found",
+              "Search with filters and a grade for every school",
+              "Favorites that save progress so a partner can pick up where you left off",
+              "Side by side comparison with the best value in each row highlighted",
+              "Applications with a checklist, deadlines, scholarships and direct contact with the school",
             ],
           },
         ],
-        outro: "These were the features that mattered most, without adding extras to an already overwhelming process.",
         figures: [
           {
-            image: { src: bscMobile, alt: "Better School Choice mobile screens: homepage, favorites and a school profile", frame: "plain" },
-            captionTitle: "Mobile screens.",
-            caption: "Homepage, favorites and a school profile.",
+            image: {
+              src: bscCompare,
+              alt: "Comparison page with three schools side by side and the best value in each row highlighted",
+              frame: "screen",
+            },
+            captionTitle: "Compare.",
+            caption: "Up to three schools side by side.",
+          },
+          {
+            image: {
+              src: bscApply,
+              alt: "Application screen on a phone with progress, a checklist of documents and upcoming deadlines",
+              frame: "phone",
+            },
+            captionTitle: "Apply.",
+            caption: "Progress, missing documents and deadlines in one place.",
           },
         ],
       },
       {
-        id: "result",
-        title: "The result",
-        lead: "The main goal was efficiency.",
+        id: "testing",
+        title: "Usability testing",
+        lead: "Three tasks, timed in person.",
         body: [
-          "The design can seem simple, but there is a purpose behind it. I considered even the slightest waste of time an image can create, and the challenge was keeping the site friendly while avoiding extra animations, illustrations and imagery. In the end, the site strikes a balance that keeps the focus on the task at hand.",
-        ],
-        figures: [
-          {
-            image: { src: bscMockup, alt: "Better School Choice mockups of the Flatiron School page and the homepage", frame: "plain" },
-            captionTitle: "Final design.",
-            caption: "The Flatiron School page and the homepage.",
-          },
+          "Parents who were searching or had already been through the process logged in, found a school's profile and finished an application while thinking out loud. The targets were under 15 seconds to log in, two clicks to find a profile and three clicks to apply. Users found everything with ease and gave positive feedback; the main fix was making buttons consistent across pages.",
         ],
       },
     ],
+    note: "Screens refreshed in 2026 from the original Figma prototype.",
   },
   {
     projectId: "early-money-habits",
-    tagline: "A responsive website where parents learn about a course that builds money habits in children ages 10 to 12.",
+    tagline: "A live money course for kids ages 10 to 12, and the website parents use to learn about it and sign up.",
     platform: "Responsive website",
     sections: [
       {
         id: "project",
         title: "The project",
-        lead: "A responsive wireframe for a website where parents learn about and sign up for a course that builds early money habits in children ages 10 to 12.",
-      },
-      {
-        id: "goal",
-        title: "The goal",
-        lead: "Financial literacy is a crucial life skill that traditional education often overlooks.",
+        lead: "Financial literacy is a crucial life skill that school often skips.",
         body: [
-          "This project gives parents the resources to teach their children about money management from an early age, setting them up for financial success in the future.",
+          "Build Early Money Habits is a 5 week live course on Zoom for 5th and 6th graders. I designed the website parents use to understand the program, meet the teachers and register their children for a one time fee.",
+        ],
+        figures: [
+          {
+            image: {
+              src: bemhLanding,
+              alt: "Build Early Money Habits landing page with a lemonade stand illustration and a button to register your child",
+              frame: "screen",
+            },
+            captionTitle: "Landing page.",
+            caption: "Friendly for kids, clear and trustworthy for the parents who sign up.",
+          },
         ],
       },
       {
-        id: "approach",
-        title: "Approach",
-        lead: "Designing for parents, with their children in mind.",
+        id: "audiences",
+        title: "Designing for two audiences",
+        lead: "Parents decide, kids take the class.",
         body: [
-          "The design needed to appeal to parents while staying mindful that the content would ultimately benefit their children. I focused on a clean, trustworthy interface that clearly communicates the value of the program and makes enrollment straightforward.",
+          "The look needed to feel playful to children while giving parents what they need to trust it: the schedule, the price and how their child's data is handled. The site promises education only: no ads, no selling data, and no real investing or accounts opened during the course.",
+        ],
+      },
+      {
+        id: "course",
+        title: "The course",
+        lead: "Six topics built around one lemonade stand.",
+        body: [
+          "Lessons move from the history of money to saving, a lemonade stand economy, the stock market, compound interest and entrepreneurship, plus parent meetings before the course starts.",
+        ],
+        figures: [
+          {
+            image: {
+              src: bemhTopics,
+              alt: "Course page with six topic cards, from Money 101 to Entrepreneurship, and the dates of two meetings before the course",
+              frame: "screen",
+            },
+            captionTitle: "Topics and schedule.",
+            caption: "Each topic and the pre course meetings for parents.",
+          },
+        ],
+      },
+      {
+        id: "registration",
+        title: "Registration",
+        lead: "A long form, split into short steps.",
+        body: [
+          "The original registration asked for parent, child and payment details on one long page. The redesign breaks it into three steps with progress shown at the top and the price always visible.",
+        ],
+        figures: [
+          {
+            image: {
+              src: bemhRegister,
+              alt: "Registration step two of three on a phone, asking for the child's name, birthdate and grade, with the $30 total at the bottom",
+              frame: "phone",
+            },
+            captionTitle: "Registration.",
+            caption: "Step two of three, with the total kept on screen.",
+          },
         ],
       },
     ],
+    note: "Screens refreshed in 2026 from the original wireframes and Figma designs.",
   },
   {
     projectId: "haydn",
-    tagline: "An AI writing tool for writers, bloggers and journalists, designed for Android and the web.",
+    tagline: "An AI writing assistant designed for Android and the web, from landing page to mobile app.",
     platform: "Android app and responsive website",
     sections: [
       {
         id: "project",
         title: "The project",
-        lead: "HAYDN is the AI tool for writers, bloggers and journalists that makes you a better writer than yourself.",
+        lead: "HAYDN helps anyone who writes, from students to bloggers, write clearly and quickly without losing their own voice.",
         body: [
-          "The brief: design a mobile app for Android, and a website that works well on every device size, from desktop to tablet to mobile.",
+          "The brief was a new landing page for the marketing site, a responsive website for desktop, tablet and phone, and a prototype of new features for the Android app.",
+        ],
+        figures: [
+          {
+            image: {
+              src: haydnLanding,
+              alt: "HAYDN landing page with a live editor preview that scores a cover letter and suggests changes",
+              frame: "screen",
+            },
+            captionTitle: "Landing page.",
+            caption: "A live editor preview shows what HAYDN does before anyone signs up.",
+          },
         ],
       },
       {
-        id: "challenge",
-        title: "The challenge",
-        lead: "Design a new landing page for the marketing website and prototype new feature ideas for the mobile app.",
-        body: ["The design had to work seamlessly across all device sizes while keeping the brand experience consistent."],
+        id: "design",
+        title: "The design",
+        lead: "One system across every screen size.",
+        body: [
+          "I designed the desktop, tablet and phone versions of the site together, so features and brand stayed consistent while layouts adapted. The app focused on the two things writers do most: checking a document and drafting something new.",
+        ],
+        figures: [
+          {
+            image: {
+              src: haydnDocs,
+              alt: "HAYDN app home with a card to upload a file or paste text, and recent documents with their scores below",
+              frame: "phone",
+            },
+            captionTitle: "App home.",
+            caption: "Uploading a document is the main action, with recent work and scores below.",
+          },
+        ],
       },
       {
-        id: "solution",
-        title: "The solution",
-        lead: "A responsive design system that adapts to each screen size without losing functionality or usability.",
-        body: [
-          "The mobile app focused on making writing assistance powered by AI available on the go, while the website highlighted the product's capabilities and benefits.",
+        id: "testing",
+        title: "Usability testing",
+        lead: "Two users, two tasks: sign in, then upload a file for correction.",
+        stats: [
+          { value: "16 s and 20 s", label: "to sign in" },
+          { value: "13 s and 19 s", label: "to upload a file" },
+          { value: "3 to 5 clicks", label: "per task" },
+        ],
+        outro:
+          'Both users finished both tasks and gave positive feedback, but they struggled to find how to log in. One assumed "Get started" was only for new users. The other tried to start a new document when asked to upload one, and missed the floating button near the bottom navigation.',
+      },
+      {
+        id: "changes",
+        title: "What changed",
+        featureGroups: [
+          {
+            items: [
+              "A Log in button on the front page, as visible as sign up",
+              "Uploading a document became the main action on the app home",
+              "A larger, brighter floating button placed above the navigation",
+              'A clearer "New" button in Documents',
+            ],
+          },
+        ],
+        figures: [
+          {
+            image: {
+              src: haydnLogin,
+              alt: "HAYDN welcome back screen with Log in and Sign up as equal tabs above the email and password fields",
+              frame: "phone",
+            },
+            captionTitle: "Log in.",
+            caption: "Log in and sign up now have equal weight.",
+          },
         ],
       },
     ],
+    note: "Screens refreshed in 2026 from the original Figma prototype.",
   },
 ];
 
